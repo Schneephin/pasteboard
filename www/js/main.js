@@ -91,7 +91,6 @@ Template.prototype.getTranslations = function(page, lang) {
     
 
     var file = "languages/" + lang + "/"+ page + ".xml";
-    alert("lol");
     var respronse = this.file.loadfile(file, "xml");
 
     switch (respronse['status']) {
