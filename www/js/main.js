@@ -49,7 +49,6 @@ File.prototype.loadfile = function (filename,type) {
                     case "xml":
                         response['data'] =  xmlHttp.responseXML; 
                         break;
-    alert("lol");
                     case "text":
                         response['data'] =  xmlHttp.responseText;
                         break;
@@ -125,7 +124,6 @@ Template.prototype.load = function(name) {
     switch (respronse['status']) {
         case  0 :
             var html = respronse['data'];
-    alert("lol");
             var template = new Object();
             template["file"] = file;
             template["html"] = html;
