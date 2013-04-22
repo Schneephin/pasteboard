@@ -2,12 +2,19 @@
 <header>
     <title><![CDATA[{ PASTEBOARD () }]]></title>
     <nav>
-            <url><![CDATA[api]]></url>
+            <url><![CDATA[api.py]]></url>
             <name><![CDATA[api]]></name>
     </nav>
     <nav>
-            <url><![CDATA[faq]]></url>
+            <url><![CDATA[faq.py]]></url>
             <name><![CDATA[faq]]></name>
     </nav>
+    <nav>
+            <url><![CDATA[register.py]]></url>
+            <name><![CDATA[register]]></name>
+    </nav>
+    <email>E-Mail:</email>
+    <password>Passwort:</password>
+    <ok>ok</ok>
 </header>
 
