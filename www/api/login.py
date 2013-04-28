@@ -1,4 +1,10 @@
 #! /usr/bin/python2
+"""
+    login.py
+    api for Login with username and pssword
+    @author Anja Siek <anja.marita@web.de>
+"""
+
 import cgi
 import cgitb; cgitb.enable()
 import json
@@ -27,5 +33,5 @@ else:
     retrun = { 'token': generate_hash() }
 
 # return access-Token
-print "Content-Type: text/html\n"
-print json.dumps(retrun)
+print ("Content-Type: text/html\n")
+print (json.dumps(retrun))

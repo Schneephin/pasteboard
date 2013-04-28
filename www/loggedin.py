@@ -3,19 +3,28 @@ import cgi, sys
 from lib import *
 import json
 
-form = cgi.FieldStorage() 
-token = form.getvalue('tk')
-if not token:
-    #redirect to start-page if toke is not set
+def forbidden():
+    #redirect to ostart-page if toke is not set
     print("Status: 403 Forbidden")
     print("Refresh: 0; url=/")
     print()
     print("Redirecting ...")
-else :
-    #set toke to cookie
-    cookie = cookie.Cookie()
-    cookie.set("tk",token)
-    
+
+form = cgi.FieldStorage() 
+token = form.getvalue('tk')
+cookie = cookie.Cookie()
+c = cookie.get("tk")
+
+if  not token and not c:
+    forbidden()
+else:
+    if not c:
+        #set toke to cookie
+        print(cookie.set("tk",token))
+
+    header ={}
+    header['Content-type'] = 'text/html'
+    basics.print_headers(header)
     #get layout
     template = "layout.html.tpl"
     tpl = "".join(open(template,'r').readlines())

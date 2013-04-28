@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import sys, os, pickle
+import sys, os
 import http.cookies 
 
 from lib.basics import print_headers
@@ -26,9 +26,10 @@ class Cookie():
             @access public
         """
         headers = {}
-        headers['Content-type'] = 'text/html'
-        headers['Set-Cookie'] = key + '=%s;' % value
-        print_headers(headers)
+        cookie = http.cookies.SimpleCookie()
+        cookie[key] = value
+        cookie[key]['expires'] = 86400
+        return cookie
 
     def get(self,key):
         """
@@ -38,6 +39,9 @@ class Cookie():
             @param key key 
             @access public
         """
-        cookie = http.cookies.SimpleCookie(os.environ["HTTP_COOKIE"])
-        value = cookie[key].value
-        return key
+        try:
+            c = http.cookies.SimpleCookie(os.environ["HTTP_COOKIE"])
+            value = c[key].value
+            return value
+        except (http.cookies.CookieError, KeyError):
+            return None 
