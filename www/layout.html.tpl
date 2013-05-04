@@ -13,13 +13,18 @@
         <script src="js/main.js"></script>
      </head>
     <body>
-        <header id="header"></header>
-        <section id="content"></section>
-        <aside id="sidebar"></aside>
-        <footer id="footer"></footer>
+        <div id="container">
+            <header id="header"></header>
+            <section id="content"></section>
+            <aside id="sidebar"></aside>
+            <footer id="footer"></footer>
+        </div>
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function () {{
+                errorHandler = new ErrorHandler();
+                template = new Template();  
                 pageHandle( {} );
+                setActive();
                 
             }}, false);
         </script>

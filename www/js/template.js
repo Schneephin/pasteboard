@@ -3,9 +3,8 @@
  * This object can load and render templates and will save them.
  * @author Anja Siek <anja.marita@web.de>
  */
-var Template = function(page, lang) {
+var Template = function() {
     this.file = new File;
-    this.data = this.getTranslations(page, lang);
     this.templatesDir = "templates";
     this.templates =  new Array();
     this.html  = "";
@@ -31,12 +30,11 @@ Template.prototype.getTranslations = function(page, lang) {
             var trans = respronse['data'];
             break;
         case 1 :
-            ErrorHandler.handel(respronse['data']);
+            errorHandler.handel(respronse['data']);
             break;
     }
 
-    var data = xml2array(trans);
-    return data;
+    this.data = xml2array(trans);
 };
 
 
@@ -63,12 +61,18 @@ Template.prototype.load = function(name) {
             return true;
             break;
         case 1 :
-            ErrorHandler.handel(respronse['data']);
+            errorHandler.handel(respronse['data']);
             return false;
             break;
     }
     return false;
 };
+
+Template.prototype.addData = function(data) {
+    for(var i in data) { 
+        this.data[i] = data[i]; 
+    }
+}
 
 /**
  * render function
@@ -85,6 +89,6 @@ Template.prototype.render = function(name, id){
         var results = document.getElementById(id);
         results.innerHTML = tmpl(this.templates[name]["html"], this.data);
     } else {
-        ErrorHandler.handel("can not render Template");
+        errorHandler.handel("can not render Template");
     }
 };

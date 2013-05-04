@@ -10,12 +10,17 @@ header, section, footer, aside, nav, article {
 
     src: url(fonts/AnonymousPro-Regular.ttf);  
 } 
+
+html {
+    height: 100%;
+}
 body {
     background: #000;
     font-size: 12px;
     color: #fff;
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 a {
     text-decoration: none;
@@ -26,10 +31,18 @@ a {
     width: 800px;
     margin: 0 auto;
 }
+div#container {
+    position:relative;
+    height:auto !important; 
+    height:100%; 
+    min-height:100%; 
+    width: 100%;
+}
 
 /* HEADER & NAVIGATION ------------------------------ */
 
 #header {
+    height:86px;
     padding: 0 15px 20px 0;
     border-bottom: 1px solid #fff; 
     margin: 0 0 0 20px;
@@ -76,7 +89,7 @@ a {
     border-top-left-radius: 7px;  
 }
 
-#header nav ul li.active a,
+#header nav ul li a.active ,
 #header nav ul li a:hover {
     background-color: #fff;
     color: #444;
@@ -93,36 +106,54 @@ a {
 #header div#login-form p span {
     font-weight: bold;
 }
+#loggedintext span {
+    margin-right:10px;
+}
 
 /* CONTENT ------------------------------------------ */
 
 #content {
-    width: 75%;
+    float:left;
+    width: 70%;
     padding: 0 15px;
-    margin: 0 0 10px 0;
-    float: left;
+    margin: 0 0 20px 50px;
+}
+
+#invite {
+    float:right;
+}
+#invite span {
+    cursor:pointer;
+    font-weight: bold;
 }
 
 /* SIDEBAR ------------------------------------------ */
 
 aside {
+    position:absolute;
     padding: 0 15px;
-    margin: 0 0 10px 0;
-    float: left;
+    top:108px;
+    bottom:40px;
+    width:15%;
+    right:0;
     border-left: 1px solid #fff;
 }
 
 /* FOOTER ------------------------------------------ */
 
 footer {
+    height:40px;
     clear: both;
     text-align: right;
-    padding: 10px 15px;
-    margin: 10px 0 0 0;
-    border-top: 1px solid #fff;
+    border-top: 1px solid #222;
+    background: #111;
+    position:absolute;
+    bottom:0;
+    width: 100%
 }
 
-footer a {
+footer div {
+    padding: 10px 20px 0 0;
     color: #999;
 }
 
@@ -139,4 +170,42 @@ form input[type='text'],
 form input[type='password']{
     padding: 0 3px 2px;
 }
+button {
+    cursor:pointer;
+}
+/* TABLE -------------------------------------------- */
+
+table {
+    width: 100%;
+    border-collapse:collapse;
+    text-align: left;
+    font-size:14px;
+}
+table caption {
+    font-weight: bold;
+    font-size:16px;
+    text-align: left;
+    padding: 20px 0px;
+}
+
+table th {
+    background: #111;
+    color:#555;
+}
+table thead {
+    border-bottom:2px solid #555;
+}
+table td, table th {
+    padding:5px;
+    border-bottom: 1px solid #fff;
+}
+
+table.pastes tbody tr {
+    cursor:pointer;
+}
+table.pastes tbody tr:hover {
+    background-color: #222;
+}
+
+
 

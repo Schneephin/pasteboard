@@ -58,19 +58,19 @@ Rest.prototype.handleRequset = function () {
                 response['status'] = 0;
                 switch(this.type) {
                     case "xml":
-                        response['data'] =  xmlHttp.responseXML; 
+                        response['result'] =  xmlHttp.responseXML; 
                         break;
                     case "text":
-                        response['data'] =  xmlHttp.responseText;
+                        response['result'] =  xmlHttp.responseText;
                         break;
                     case "json":
-                        response['data'] =  JSON.parse(xmlHttp.responseText);
+                        response['result'] =  JSON.parse(xmlHttp.responseText);
                         break;
                     default:
-                        response['data'] =  xmlHttp.response;
+                        response['result'] =  xmlHttp.response;
                 }
             } else {
-                response['data'] = xmlHttp.status + "error while loading file";
+                response['result'] = xmlHttp.status + "error while loading file";
             }
             return response;
         }

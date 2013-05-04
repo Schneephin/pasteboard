@@ -1,4 +1,3 @@
-<article>
-  <h2></h2>
-  <p></p>
-</article>
+<p id="invite"><%=trans.inftext%>
+<span onclick="invite();"><%=trans.inftextlink%></span>
+</p>

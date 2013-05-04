@@ -18,9 +18,10 @@ function pageHandle(pages) {
         lang = search['lang'];
     }
     //create handel templates
-    var template = new Template(page,lang);  
+    template.getTranslations(page,lang);  
+    loadScript("js/pages/"+page+".js");
     for (i in pages) {
-        handleTemplate(template,pages[i],i);
+        handleTemplate(pages[i],i);
     }
 };
 
@@ -32,7 +33,7 @@ function pageHandle(pages) {
  * @param string page
  * @param string id
  */
-function handleTemplate(template, page, id) {
+function handleTemplate(page, id) {
     var returnv = template.load(page);
     if (returnv) {
         template.render(page,id);

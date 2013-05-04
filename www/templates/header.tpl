@@ -1,16 +1,16 @@
-<div id="logo"><a href="/" ><%=header.title%></a></div>
+<div id="logo"><a href="/" ><%=trans.header.title%></a></div>
 <nav>
     <ul>
-        <% for ( var i in header.nav ) { %>
-            <li><a href="<%=header.nav[i].url%>"><%=header.nav[i].name%></a></li>
+        <% for ( var i in trans.header.nav ) { %>
+            <li><a href="<%=trans.header.nav[i].url%>"><%=trans.header.nav[i].name%></a></li>
         <% } %>
     </ul>
 </nav>
 
 <div id="login-form">
-<form onsubmit="handleLogin(this,\'login.py'); return false;">
-    <input type="text" name="email" placeholder="<%=header.email%>">
-    <input type="password" name="password" placeholder="<%=header.password%>">
-    <input type="submit" value="<%=header.ok%>">
+<form onsubmit="handleLogin(this,\'pasteboard.py/login'); return false;">
+    <input type="text" name="email" placeholder="<%=trans.header.email%>">
+    <input type="password" name="password" placeholder="<%=trans.header.password%>">
+    <input type="submit" value="<%=trans.header.ok%>">
 </form> 
 </div>

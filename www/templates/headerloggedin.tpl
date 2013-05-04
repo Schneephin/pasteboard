@@ -1,16 +1,16 @@
-<div id="logo"><a href="/" ><%=header.title%></a></div>
+<div id="logo"><a href="/" ><%=trans.header.title%></a></div>
 <nav>
     <ul>
-        <% for ( var i in header.nav ) { %>
-            <li><a href="<%=header.nav[i].url%>"><%=header.nav[i].name%></a></li>
+        <% for ( var i in trans.header.nav ) { %>
+            <li><a href="<%=trans.header.nav[i].url%>"><%=trans.header.nav[i].name%></a></li>
         <% } %>
     </ul>
 </nav>
 <div id="login-form">
     <p id="loggedintext">
-        <%=header.loggedintext%>
+        <%=trans.header.loggedintext%>
         <span><%=name%></span>
-        <button name="mydata"><%=header.mydata%></button>
-        <button name="logout"><%=header.logout%></button>
+        <button name="mydata"><%=trans.header.mydata%></button>
+        <button name="logout"><%=trans.header.logout%></button>
     </p>
 </div>
