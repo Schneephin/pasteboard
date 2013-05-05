@@ -21,7 +21,7 @@ if  not token and not c:
 else:
     if not c:
         #set toke to cookie
-        sys.stdout.write(cookie.set("tk",token))
+        print(cookie.set("tk",token))
 
     header ={}
     header['Content-type'] = 'text/html'
