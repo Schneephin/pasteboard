@@ -15,10 +15,6 @@ var ErrorHandler = function() {
     }
 };
 
-
-
-
-
 /**
  * function handleForm
  * handels form data and uses rest handler to send data
@@ -41,48 +37,13 @@ function handleForm(form, page) {
     return rest.handleRequset();
 }
 
+
 /**
- * function handleLogin
- * special handler for the login-form
+ * loadScript(url) 
+ * function to load page js from url
  * @author Anja Siek <anja.marita@web.de>
- * @param form
- * @param page
+ * @param url
  */
-function handleLogin(form, page) {
-    var result = handleForm(form, page);
-    
-    if (result["status"] == 0) {
-        if (result["result"].state == 'ok') {
-            if (null != result["result"].data.token) {
-                this.document.location.href = "pastes.py?tk="+result["result"].data.token;
-            } else {
-                errorHandler.handel("failed to load data");n
-            }
-        } else {
-            if (null != result["result"].msg) {n
-                errorHandler.handel(result["result"].msg);
-            } else {
-                errorHandler.handel("failed to load data");
-            }
-        }
-    } else {
-        errorHandler.handel("your login-Data was not correct please register or try again");
-    }
-}
-
-function invite()
-{
-    var rest = new Rest("POST", "api/pasteboard.py/getInviteKey", "json","");
-    var result = rest.handleRequset(); 
-    if (result["status"] == 0) {
-        if (result["result"].state == 'ok') {
-            if (null != result["result"].data.invkey ) {
-                alert('inviteKey: '+ result["result"].data.invkey);
-            }
-        }
-    }
-}
-
 function loadScript(url)
 {
     // adding the script tag to the head as suggested before

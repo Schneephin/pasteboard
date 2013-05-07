@@ -126,6 +126,14 @@ div#container {
     cursor:pointer;
     font-weight: bold;
 }
+div#register-form form input{
+    display:block;
+    margin: 15px 30px 0;
+}
+div#info {
+    margin-top:20px;
+    font-size: 16px;
+}
 
 /* SIDEBAR ------------------------------------------ */
 
@@ -206,6 +214,3 @@ table.pastes tbody tr {
 table.pastes tbody tr:hover {
     background-color: #222;
 }
-
-
-

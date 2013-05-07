@@ -1,28 +1,30 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import MySQLdb as mdb 
-import sys
+import oursql as mdb 
 
 
+class DB():
 
-class DB ():
+    def __init__(self):
+        self.connection = None
+        self.config = {
+            'host': "localhost",
+            'user': "pasteboard",
+            'pass': "pasteboard",
+            'db':   "pasteboard"
+        } 
 
-    connection = None
-    config = {
-        'host': "localhost",
-        'user': "pasteboard",
-        'pass': "pasteboard",
-        'db':   "pasteboard"
-    } 
-
-    def connect(self, host, db, user, password):
+    def connect(self):
         try:
             self.connection = mdb.connect(
-                self.config['host'], self.config['db'], self.config['user'], self.config['password'])
+                host = self.config['host'], 
+                db = self.config['db'], 
+                user = self.config['user'], 
+                passwd = self.config['pass'],
+            )
             
-        except mdb.Error, e:
-          
+        except mdb.Error as e:
             return  "Error %d: %s" % (e.args[0], e.args[1])
 
     def getConnection(self):
@@ -31,7 +33,7 @@ class DB ():
         return self.connection
 
 
-    def disconnect():
+    def disconnect(self):
         
         if self.connection:
             self.connection.close()

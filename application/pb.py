@@ -1,4 +1,5 @@
 
+from application.handler import *
 
 class Pb:
     def __init__(self):
@@ -6,5 +7,9 @@ class Pb:
 
     def login(self, email, password):
         pass
+
+    def getInviteKey(self):
+        user = User.User()
+        return user.getInviteKey()
 
 

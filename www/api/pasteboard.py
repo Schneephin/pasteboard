@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-    login.py
+    pasteboard.py
     api for Login with username and pssword
     @author Anja Siek <anja.marita@web.de>
 """
@@ -39,14 +39,6 @@ class Pasteboard:
 
         self.return_response(result)
 
-    def generate_hash(self):
-        """
-            generate_hash 
-            function to generate hash-key 
-            @access public
-        """
-        import hashlib, time
-        return hashlib.md5(str(time.time()).encode('utf-8')).hexdigest()
 
     def getUser(self):
         token = cgi.escape(json.loads(self.data)['tk'])
@@ -85,8 +77,35 @@ class Pasteboard:
             print_headers({"Status": "403 Forbidden"})
    
     def getInviteKey(self):
+        
+        key = self.pb.getInviteKey()
+
         result = {'state': 'ok'}
-        result['data'] = {'invkey': self.generate_hash()}
+        result['data'] = {'invkey': key}
+        self.return_response(result)
+
+    def register(self):
+        #get POST Data
+        email = cgi.escape(json.loads(self.data)['email'])
+        name = cgi.escape(json.loads(self.data)['name'])
+        passwd = cgi.escape(json.loads(self.data)['password'])
+        passwdr = cgi.escape(json.loads(self.data)['password-r'])
+        key = cgi.escape(json.loads(self.data)['key'])
+
+        # @TODO: check values
+        # lookup on db and generate Token + timeout
+        # dummydata :
+        if not passwd or not passwdr or not (passwd == passwdr):
+            result = {'state': 'error'} 
+            result['msg'] = 'your password is wrong'
+        elif not email or not name or not key:
+            result = {'state': 'error'}
+            result['msg'] = 'email, name and invite key musst be set'
+        else:
+            token = self.generate_hash()
+            result = {'state': 'ok'}
+            result['data'] = {'token': token }
+
         self.return_response(result)
  
 
@@ -120,19 +139,21 @@ def main():
     pasteboard = Pasteboard(data)
 
     
-    try:
-        if function == 'login':
-            pasteboard.login()
-        elif function == 'getUser':
-            pasteboard.getUser()
-        elif function == 'getPastesList':
-            pasteboard.getPastesList()
-        elif function == 'getInviteKey':
-            pasteboard.getInviteKey()
-        else:
-            pasteboard.print_headers({"Status": "404 Not found"})
-    except:
+ #   try:
+    if function == 'login':
+        pasteboard.login()
+    elif function == 'getUser':
+        pasteboard.getUser()
+    elif function == 'getPastesList':
+        pasteboard.getPastesList()
+    elif function == 'getInviteKey':
+        pasteboard.getInviteKey()
+    elif function == 'register':
+        pasteboard.register()
+    else:
         pasteboard.print_headers({"Status": "404 Not found"})
+ #   except:
+ #       pasteboard.print_headers({"Status": "404 Not found"})
 
 if __name__ == '__main__':
     main()
