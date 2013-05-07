@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title></title>
+    <script src="formulare.js" type="text/javascript"></script>
+</head>
+<body>
+    <form method="post" action="" onsubmit="return pruefeFormular(this);">
+        Benutzername:* <input type="text" name="Name_P" /><br />
+        Passwort:* <input type="password" name="Passwort_P" /><br />
+        Geschlecht:* <input type="radio" name="Geschlecht_P" value="w" />weiblich
+            <input type="radio" name="Geschlecht_P" value"m" />m&auml;nnlich<br />
+        Land:* <select name="Land_P">
+            <option value="">--- bitte w&auml;hlen ----</option>
+            <option value="D">Deutschland</option>
+            <option value="A">&Ouml;sterreich</option>
+            <option value="CH">Schweiz</option>
+        </select><br />
+        Interessen: <select name="Interessen" multiple="multiple" size="3">
+            <option value="HTML">HTML</option>
+            <option value="CSS">CSS</option>
+            <option value="JS">JS</option>
+        </select><br />
+        Kommentar: <textarea name="Kommentar"></textarea><br />
+        <input type="checkbox" name="AGB_P" value="ok" />Ich akzeptiere die AGB*<br />
+        <input type="submit" value="Registrieren" />        
+    </form>
+</body>
+</html>
