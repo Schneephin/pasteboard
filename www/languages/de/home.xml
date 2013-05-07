@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<header>
-    <title><![CDATA[{ PASTEBOARD () }]]></title>
-    <nav>
-            <url><![CDATA[api]]></url>
-            <name><![CDATA[api]]></name>
-    </nav>
-    <nav>
-            <url><![CDATA[faq]]></url>
-            <name><![CDATA[faq]]></name>
-    </nav>
-</header>
+<trans>
+    <header>
+        <title><![CDATA[{ PASTEBOARD () }]]></title>
+        <nav>
+                <url><![CDATA[api.py]]></url>
+                <name><![CDATA[api]]></name>
+        </nav>
+        <nav>
+                <url><![CDATA[faq.py]]></url>
+                <name><![CDATA[faq]]></name>
+        </nav>
+        <nav>
+                <url><![CDATA[register.py]]></url>
+                <name><![CDATA[register]]></name>
+        </nav>
+        <email>E-Mail:</email>
+        <password>Passwort:</password>
+        <ok>ok</ok>
+    </header>
+    <inftext>wenn du noch nicht registriert bist</inftext>
+    <inftextlink>klicke hier für eine Inviteanfrage</inftextlink>
+</trans>
 

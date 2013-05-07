@@ -2,114 +2,210 @@
 header, section, footer, aside, nav, article {  
     display: block;  
 }
- 
+
 /* LAYOUT ------------------------------------------ */
 @font-face {
-   font-family: AnonymousPro-Regular;
-   local: AnonymousPro-Regular;       
+    font-family: AnonymousPro-Regular;
+    local: AnonymousPro-Regular;       
 
-   src: url(fonts/AnonymousPro-Regular.ttf);  
+    src: url(fonts/AnonymousPro-Regular.ttf);  
 } 
+
+html {
+    height: 100%;
+}
 body {
-  background: #000;
-  font-size: 12px;
-  color: #fff;
-  margin: 0;
-  padding: 0;
+    background: #000;
+    font-size: 12px;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 a {
-  text-decoration: none;
-  color:#444;
+    text-decoration: none;
+    color:#444;
 }
-  
-#doc  {
-  width: 800px;
-  margin: 0 auto;
-}
- 
-/* HEADER & NAVIGATION ------------------------------ */
- 
-#header {
-  padding: 0 15px 20px 0;
-  border-bottom: 1px solid #fff; 
-  margin: 0 0 0 20px;
-}
- 
-#header div#logo {
-  font-weight: normal;
-  font-size: 30px;
-  margin: 0 0  0 25px;
-  padding: 25px 0;
-  color: #fff;
-}
- 
-#header nav ul {
-  display: block;
-  list-style: none;
-  margin: 0;
-  padding: 0 0 0 40px;
-}
- 
-#header nav ul li {
-  display: inline;
-  float: left; 
-/*  display: inline;*/
-  margin: 0;
-  padding: 0;
-}
- 
-#header nav ul li a {
-  margin: 0;
-  font-size: 15px;
-  display: inline;
-  padding: 2px 25px;
-  color: #fff;
-  background-color: #000;
-  border: 1px solid #fff;
 
-  box-shadow:-1px -2px 2px #fff;
-  -moz-border-top-left-radius: 7px;
-  -webkit-border-top-left-radius: 7px;
-  -ms-border-top-left-radius: 7px;
-  -o-border-top-left-radius: 7px;
-  -khtml-border-top-left-radius: 7px;
-  border-top-left-radius: 7px;  
+#doc  {
+    width: 800px;
+    margin: 0 auto;
 }
- 
-#header nav ul li.active a,
+div#container {
+    position:relative;
+    height:auto !important; 
+    height:100%; 
+    min-height:100%; 
+    width: 100%;
+}
+
+/* HEADER & NAVIGATION ------------------------------ */
+
+#header {
+    height:86px;
+    padding: 0 15px 20px 0;
+    border-bottom: 1px solid #fff; 
+    margin: 0 0 0 20px;
+}
+
+#header div#logo {
+    font-weight: normal;
+    font-size: 30px;
+    margin: 0 0  0 25px;
+    padding: 25px 0;
+    color: #fff;
+}
+
+#header nav ul {
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 40px;
+}
+
+#header nav ul li {
+    display: inline;
+    float: left; 
+    /*  display: inline;*/
+    margin: 0;
+    padding: 0;
+}
+
+#header nav ul li a {
+    margin: 0;
+    font-size: 15px;
+    display: inline;
+    padding: 2px 25px;
+    color: #fff;
+    background-color: #000;
+    border: 1px solid #fff;
+
+    box-shadow:-1px -2px 2px #fff;
+    -moz-border-top-left-radius: 7px;
+    -webkit-border-top-left-radius: 7px;
+    -ms-border-top-left-radius: 7px;
+    -o-border-top-left-radius: 7px;
+    -khtml-border-top-left-radius: 7px;
+    border-top-left-radius: 7px;  
+}
+
+#header nav ul li a.active ,
 #header nav ul li a:hover {
-  background-color: #fff;
-  color: #444;
+    background-color: #fff;
+    color: #444;
 }
- 
+
+#header div#login-form {
+    margin-right :15px;
+    float:right;
+    padding: 0;
+} 
+#header div#login-form p {
+    margin: 0;
+}
+#header div#login-form p span {
+    font-weight: bold;
+}
+#loggedintext span {
+    margin-right:10px;
+}
+
 /* CONTENT ------------------------------------------ */
- 
+
 #content {
-  width: 440px;
-  padding: 0 15px;
-  margin: 0 0 10px 0;
-  float: left;
+    float:left;
+    width: 70%;
+    padding: 0 15px;
+    margin: 0 0 20px 50px;
 }
- 
+
+#invite {
+    float:right;
+}
+#invite span {
+    cursor:pointer;
+    font-weight: bold;
+}
+
 /* SIDEBAR ------------------------------------------ */
- 
+
 aside {
-  width: 300px;
-  padding: 0 15px;
-  margin: 0 0 10px 0;
-  float: left;
+    position:absolute;
+    padding: 0 15px;
+    top:108px;
+    bottom:40px;
+    width:15%;
+    right:0;
+    border-left: 1px solid #fff;
 }
- 
+
 /* FOOTER ------------------------------------------ */
- 
+
 footer {
-  clear: both;
-  background: #DDD;
-  text-align: right;
-  padding: 10px 15px;
-  margin: 10px 0 0 0;
+    height:40px;
+    clear: both;
+    text-align: right;
+    border-top: 1px solid #222;
+    background: #111;
+    position:absolute;
+    bottom:0;
+    width: 100%
 }
- 
-footer a {
-  color: #999;
+
+footer div {
+    padding: 10px 20px 0 0;
+    color: #999;
 }
+
+/* FORM -------------------------------------------- */
+
+
+form input, button {
+    background: #000;
+    color:#fff; 
+    border: 1px solid #fff;
+    padding: 0;
+}
+form input[type='text'],
+form input[type='password']{
+    padding: 0 3px 2px;
+}
+button {
+    cursor:pointer;
+}
+/* TABLE -------------------------------------------- */
+
+table {
+    width: 100%;
+    border-collapse:collapse;
+    text-align: left;
+    font-size:14px;
+}
+table caption {
+    font-weight: bold;
+    font-size:16px;
+    text-align: left;
+    padding: 20px 0px;
+}
+
+table th {
+    background: #111;
+    color:#555;
+}
+table thead {
+    border-bottom:2px solid #555;
+}
+table td, table th {
+    padding:5px;
+    border-bottom: 1px solid #fff;
+}
+
+table.pastes tbody tr {
+    cursor:pointer;
+}
+table.pastes tbody tr:hover {
+    background-color: #222;
+}
+
+
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trans>
+    <header>
+        <title><![CDATA[{ PASTEBOARD () }]]></title>
+        <nav>
+                <url><![CDATA[pastes.py]]></url>
+                <name><![CDATA[pastes]]></name>
+        </nav>
+        <nav>
+                <url><![CDATA[groups.py]]></url>
+                <name><![CDATA[groups]]></name>
+        </nav>
+        <nav>
+                <url><![CDATA[api.py]]></url>
+                <name><![CDATA[api]]></name>
+        </nav>
+        <nav>
+                <url><![CDATA[faq.py]]></url>
+                <name><![CDATA[faq]]></name>
+        </nav>
+
+        <loggedintext>eingelogged als :</loggedintext>
+        <mydata>meine Daten</mydata>
+        <logout>ausloggen</logout>
+    </header>
+    <tabletitle>pastes</tabletitle>
+    <pasteId>id</pasteId>
+    <pasteTitle>name</pasteTitle>
+    <pasteDate>datum</pasteDate>
+</trans>
