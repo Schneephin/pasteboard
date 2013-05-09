@@ -1,8 +1,9 @@
-from application.db import *
+from application.db.User import User as dbUser
 
 
 class User:
     def __init__(self):
+        self.dbUser = dbUser()
         pass
 
 
@@ -21,8 +22,18 @@ class User:
 
         return key
 
-
     def createUser(self,key):
-        user = User.User()
-        return user.createUser(key)
+        self.dbUser.createUser(key)
+
+    def register(self, uname, email, passw, ikey):
+        self.dbUser.register(uname, email, passw, ikey)
+
+        return self.generate_hash()
+
+    def login(self, email, passwd):
+        self.dbUser.login(email,passwd)
+        
+        return self.generate_hash()
+
+
 

@@ -6,10 +6,15 @@ class Pb:
         pass
 
     def login(self, email, password):
-        pass
+        user = User.User()
+        return user.login(email, password)
 
     def getInviteKey(self):
         user = User.User()
         return user.getInviteKey()
+
+    def register (self, uname, email, passw, ikey):
+        user = User.User()
+        return user.register(uname, email, passw, ikey)
 
 

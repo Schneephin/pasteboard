@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import oursql as mdb 
+import pymysql as mdb 
 
 
 class DB():

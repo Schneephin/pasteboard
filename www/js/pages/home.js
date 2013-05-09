@@ -13,10 +13,10 @@ function handleLogin(form, page) {
             if (null != result["result"].data.token) {
                 this.document.location.href = "pastes.py?tk="+result["result"].data.token;
             } else {
-                errorHandler.handel("failed to load data");n
+                errorHandler.handel("failed to load data");
             }
         } else {
-            if (null != result["result"].msg) {n
+            if (null != result["result"].msg) {
                 errorHandler.handel(result["result"].msg);
             } else {
                 errorHandler.handel("failed to load data");
