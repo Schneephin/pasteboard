@@ -9,6 +9,7 @@ function pageHandle(pages) {
     page = page.replace(/\.[^/.]+$/, "");
     page = page.replace("/", "");
     page = page.replace("www", "");
+    page = page.replace("index", "");
     if (page == "") { 
         var page = "home";
     }
