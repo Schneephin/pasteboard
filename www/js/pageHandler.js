@@ -8,6 +8,7 @@ function pageHandle(pages) {
     var page = window.location.pathname;
     page = page.replace(/\.[^/.]+$/, "");
     page = page.replace("/", "");
+    page = page.replace("www", "");
     if (page == "") { 
         var page = "home";
     }
