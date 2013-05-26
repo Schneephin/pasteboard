@@ -1,21 +1,21 @@
 CREATE TABLE IF NOT EXISTS pasteboard.pb_users (
     id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     email VARCHAR(254),
+    password VARCHAR(32),
     invitekey VARCHAR(32),
     PRIMARY KEY(id)
 );
 
 CREATE TABLE IF NOT EXISTS pasteboard.pb_userdata(
     id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-    userId INTEGER UNSIGNED NOT NULL,
+    user_id INTEGER UNSIGNED NOT NULL,
     username VARCHAR(32),
-    password VARCHAR(32),
     PRIMARY KEY(id)
 );
 
 CREATE TABLE IF NOT EXISTS pasteboard.pb_pastes(
     id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-    greoup_id INTEGER UNSIGNED NOT NULL ,
+    group_id INTEGER UNSIGNED NOT NULL ,
     parent_id INTEGER UNSIGNED,
     category_id INTEGER UNSIGNED,
     PRIMARY KEY(id)
@@ -52,8 +52,9 @@ CREATE TABLE IF NOT EXISTS pasteboard.pb_categorys (
 
 CREATE TABLE IF NOT EXISTS pasteboard.pb_token (
     user_id INTEGER UNSIGNED NOT NULL,
-    token VARCHAR(254),
-    PRIMARY KEY(user_id)
+    token VARCHAR(254) NOT NULL,
+    PRIMARY KEY(user_id),
+    KEY token (token)
 );
 
 

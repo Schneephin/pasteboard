@@ -2,7 +2,6 @@ from application.db.connect import DB
 import hashlib
 
 class DbUserError(Exception):
-    def __init__(self, value):
     """
         DbUserError(Exception): 
         Exception for User-Db Class
@@ -11,7 +10,9 @@ class DbUserError(Exception):
         @version $id$
         @author Anja Siek <anja.marita@web.de> 
     """
+    def __init__(self, value):
         self.value = value
+    
     def __str__(self):
         """
             __str__ 
@@ -22,7 +23,6 @@ class DbUserError(Exception):
         return repr(self.value)
 
 class User(DB):
-    def __init__(self):
     """
         User(DB): 
         extends connect.DB class so that all functions from 
@@ -31,6 +31,7 @@ class User(DB):
         @author Anja Siek <anja.marita@web.de>
         @version $id$
     """
+    def __init__(self):
         # call parant init-method
         super().__init__()
 
@@ -73,10 +74,11 @@ class User(DB):
 
         #if all is ok save data to user
         password = self.getMd5(passw)
-        cursor.execute('UPDATE pb_users SET email = %s WHERE invitekey = %s',(email, ikey))
-        cursor.execute('INSERT INTO pb_userdata (userId,username,password) VALUES (%s, %s,%s)',(uid[0],uname,password))
+        cursor.execute('UPDATE pb_users SET email = %s,password = %s WHERE invitekey = %s',(email,password, ikey))
+        cursor.execute('INSERT INTO pb_userdata (user_id,username) VALUES (%s, %s)',(uid[0],uname))
         self.getConnection().commit()
         self.disconnect()
+        return uid[0]
 
     def getMd5(self,passw):
         """
@@ -101,19 +103,35 @@ class User(DB):
         
         self.getConnection()
         cursor  = self.connection.cursor()
-        cursor.execute('SELECT id FROM pb_users WHERE email = %s',(email))
-        uid = cursor.fetchone()
-        if not uid or  not uid[0] > 0:
+        cursor.execute('SELECT id,password FROM pb_users WHERE email = %s',(email))
+        user = cursor.fetchone()
+        if not user or not user[0] > 0 or not user[1] or not user[1] == password:
             #error no user for email found
             raise DbUserError("email or password wrong")
 
-        cursor.execute('SELECT password FROM pb_userdata WHERE userId = %s',uid[0])
-        pw = cursor.fetchone()
-        if not pw or not pw[0] or  not pw[0] == password:
-            #error password is wrong
-            raise DbUserError("email or password wrong")
+        return user[0] 
 
-        return True 
+    def getUserData(self, uid):
+        self.getConnection()
+        cursor = self.connection.cursor(self.mdb.cursors.DictCursor) 
+        cursor.execute(
+                """SELECT 
+                    a.user_id as id, 
+                    a.username as username, 
+                    b.email as email  
+                FROM 
+                    pb_userdata as a 
+                JOIN 
+                    pb_users as b
+                ON  
+                    a.user_id = b.id 
+                WHERE 
+                    a.user_id = %s""",uid)
+        user = cursor.fetchone()
+        self.getConnection().commit()
+        self.disconnect()
+
+        return user
 
 
 

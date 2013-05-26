@@ -1,8 +1,8 @@
 from application.db.User import User as dbUser
+from application.db.Token import Token as dbToken
 
 
 class User:
-    def __init__(self):
     """
         User: 
         User-handler class  
@@ -10,17 +10,11 @@ class User:
         @version $id$
         @author Anja Siek <anja.marita@web.de> 
     """
+    def __init__(self):
         # create class-var DB-User
         self.dbUser = dbUser()
+        self.dbToken = dbToken()
 
-    def generate_hash(self):
-        """
-            generate_hash 
-            function to generate hash-key 
-            @access public
-        """
-        import hashlib, time
-        return hashlib.md5(str(time.time()).encode('utf-8')).hexdigest()
 
     def getInviteKey(self):
         """
@@ -28,7 +22,7 @@ class User:
             create user with key on success return key 
             @access public
         """
-        key = self.generate_hash()
+        key = self.dbToken.generate_hash()
         self.createUser(key)
 
         return key
@@ -52,9 +46,10 @@ class User:
             @param ikey ikey 
             @access public
         """
-        self.dbUser.register(uname, email, passw, ikey)
+        uid = self.dbUser.register(uname, email, passw, ikey)
+        token = self.dbToken.createToken(uid)  
 
-        return self.generate_hash()
+        return token
 
     def login(self, email, passwd):
         """
@@ -64,6 +59,13 @@ class User:
             @param passwd passwd 
             @access public
         """
-        self.dbUser.login(email,passwd)
+        uid = self.dbUser.login(email,passwd)
+        token = self.dbToken.createToken(uid)  
         
-        return self.generate_hash()
+        return token
+
+    def getUser(self, token):
+        uid = self.dbToken.getUserIdbyToken(token)
+        user = self.dbUser.getUserData(uid)
+        return user
+

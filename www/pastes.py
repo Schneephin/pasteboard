@@ -6,10 +6,10 @@ import json
 def forbidden():
     #redirect to ostart-page if toke is not set
     header ={}
-    header['Status'] = '403 Forbidden'
     header['Refresh'] = '0; url=/'
+    header['Status'] = '403 Forbidden'
+    header['Content-type'] = 'text/html; charset=utf-8'
     basics.print_headers(header)
-    sys.stdout.write("Redirecting ...")
 
 form = cgi.FieldStorage() 
 token = form.getvalue('tk')
@@ -19,7 +19,7 @@ c = cookie.get("tk")
 if  not token and not c:
     forbidden()
 else:
-    if not c:
+    if not c or not c == token :
         #set toke to cookie
         print(cookie.set("tk",token))
 

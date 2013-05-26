@@ -3,7 +3,6 @@
 
 import pymysql as mdb 
 
-
 class DB():
 
     """
@@ -21,6 +20,7 @@ class DB():
             @todo: put it into config-file
             @access private
         """
+        self.mdb = mdb
         self.connection = None
         self.config = {
             'host': "localhost",

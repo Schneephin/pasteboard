@@ -9,8 +9,8 @@
 <div id="login-form">
     <p id="loggedintext">
         <%=trans.header.loggedintext%>
-        <span><%=name%></span>
+        <span><%=username%></span>
         <button name="mydata"><%=trans.header.mydata%></button>
-        <button name="logout"><%=trans.header.logout%></button>
+        <button name="logout" onclick="logout();"><%=trans.header.logout%></button>
     </p>
 </div>

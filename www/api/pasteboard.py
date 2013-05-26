@@ -11,6 +11,7 @@ import cgitb; cgitb.enable()
 import json
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))))
 from application.pb import Pb
+from application.pb import PasteboardError
 
 
 class Pasteboard:
@@ -58,18 +59,20 @@ class Pasteboard:
 
     def getUser(self):
         token = cgi.escape(json.loads(self.data)['tk'])
-        if self.checkToken(token):
+        result = {'state': 'error'}
 
+        try :
+            user = self.pb.getUser(token)
             result = {'state': 'ok'}
-            result['data'] = {
-                'id': '12',
-                'email': 'lol@lal.de',
-                'name': 'dörte'
-            }
-            
-            self.return_response(result)
-        else:
-            print_headers({"Status": "403 Forbidden"})
+            result['data'] = user 
+        except PasteboardError as e:
+            self.print_headers({"Status": "403 Forbidden"})
+            result['msg'] = e.__str__()
+            pass
+        except Exception as e:
+            result['msg'] = e.__str__()
+        
+        self.return_response(result)
 
     def getPastesList(self):
         token = cgi.escape(json.loads(self.data)['tk'])
@@ -91,7 +94,7 @@ class Pasteboard:
             }
             self.return_response(result)
         else:
-            print_headers({"Status": "403 Forbidden"})
+            self.print_headers({"Status": "403 Forbidden"})
    
     def getInviteKey(self):
         """

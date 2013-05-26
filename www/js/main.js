@@ -56,6 +56,12 @@ function loadScript(url)
    head.appendChild(script);
 }
 
+function logout()
+{
+    deleteCookie("tk");
+    window.location.href = window.location.href.split('?')[0];
+}
+
 /**
  * upstream code comes from: http://www.quirksmode.org/js/cookies.html
  */
@@ -68,6 +74,10 @@ function readCookie(name) {
         if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
     }
     return null;
+}
+function deleteCookie(name)
+{
+    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 /**
  * upstream code comes from:
