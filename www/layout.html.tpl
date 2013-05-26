@@ -11,6 +11,7 @@
         <script src="js/rest.js"></script>
         <script src="js/template.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/formulare.js"></script>
      </head>
     <body>
         <div id="container">
