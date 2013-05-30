@@ -10,9 +10,17 @@ function pruefeFormular(f){
         var element = f.elements[i];
         // Ueberprüfung ueberspringen wenn kein Pflichtfeld
 		// Alle Elemente die mit "_P" Ende werden ueberprueft
-        if (element.name.lastIndexOf("_P") != element.name.length - 2) {
+        /**
+		 * if (element.name.lastIndexOf("_P") != element.name.length - 2) {
+         *    continue;
+         *}
+		 */
+		// Alle Elemente mit der Klasse "test" werden ueberprueft
+        if (element.className != "test") {
             continue;
         }
+		// fehler += "\nClass '" + element.className + "'";
+		//element.name.lastIndexOf("_P") != element.name.length - 2 || 
 		// Formularfeld entsprechende Ueberpruefung auswaehlen und durchfuehren
         switch (element.type) {
 			// Textfeld, Passwortfeld und Textbereiche pruefen
