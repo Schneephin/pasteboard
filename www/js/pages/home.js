@@ -1,3 +1,6 @@
+//required for javascript pageloader see main.js function: loadScript  
+//special javascript for home page
+
 /**
  * function handleLogin
  * special handler for the login-form

@@ -22,7 +22,7 @@ function pageHandle(pages) {
     //create handel templates
     template.getTranslations(page,lang);  
     loadScript("js/pages/"+page+".js");
-    for (i in pages) {
+    for (var i in pages) {
         handleTemplate(pages[i],i);
     }
 };

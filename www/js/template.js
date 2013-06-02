@@ -8,6 +8,7 @@ var Template = function() {
     this.templatesDir = "templates";
     this.templates =  new Array();
     this.html  = "";
+    this.data = new Array();
 };             
 
 /**
@@ -22,19 +23,23 @@ var Template = function() {
 Template.prototype.getTranslations = function(page, lang) {
     
 
-    var file = "languages/" + lang + "/"+ page + ".xml";
-    var respronse = this.file.loadfile(file, "xml");
-
-    switch (respronse['status']) {
-        case  0 :
-            var trans = respronse['data'];
-            break;
-        case 1 :
-            errorHandler.handel(respronse['data']);
-            break;
+    var files = new Array(
+        "languages/" + lang + "/main.xml",
+        "languages/" + lang + "/"+ page + ".xml"
+        );
+    
+    for (var i = 0; i < files.length; i++) {
+        var respronse = this.file.loadfile(files[i], "xml");
+        switch (respronse['status']) {
+            case  0 :
+                var trans = respronse['data'];
+                this.addData(xml2array(trans),"trans");
+                break;
+            case 1 :
+                errorHandler.handel(respronse['data']);
+                break;
+        }
     }
-
-    this.data = xml2array(trans);
 };
 
 
@@ -68,9 +73,18 @@ Template.prototype.load = function(name) {
     return false;
 };
 
-Template.prototype.addData = function(data) {
-    for(var i in data) { 
-        this.data[i] = data[i]; 
+Template.prototype.addData = function(data, key) {
+    if ('undefined' != typeof key) {
+        if (typeof this.data[key] == 'undefined') {
+            this.data[key] = new Array();
+        }
+        for(var i in data[key]) { 
+            this.data[key][i] = data[key][i];
+        }
+    } else {
+        for(var i in data) { 
+            this.data[i] = data[i]; 
+        }
     }
 }
 

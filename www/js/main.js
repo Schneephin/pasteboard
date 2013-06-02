@@ -37,7 +37,6 @@ function handleForm(form, page) {
     return rest.handleRequset();
 }
 
-
 /**
  * loadScript(url) 
  * function to load page js from url
@@ -55,13 +54,32 @@ function loadScript(url)
    // fire the loading
    head.appendChild(script);
 }
-
+/**
+ * logout
+ * function to log the user out from page
+ * removes cookie with the login-token
+ */
 function logout()
 {
     deleteCookie("tk");
-    window.location.href = window.location.href.split('?')[0];
+    window.location.pathname = "";
 }
+/**
+ * function addToTemplate
+ * function to add data to template
+ * @autor Anja Siek <anja.marita@web.de>
+ * @param result
+ */
+function addToTemplate(result) {
 
+    if (result["status"] == 0) { 
+        if (result["result"].state == 'ok') {
+            if (null != result["result"].data ) {
+               template.addData(result["result"].data);
+            }
+        }
+    }
+}
 /**
  * upstream code comes from: http://www.quirksmode.org/js/cookies.html
  */
@@ -83,8 +101,8 @@ function deleteCookie(name)
  * upstream code comes from:
  */
 function setActive() {
-  aObj = document.getElementById('header').getElementsByTagName('a');
-  for(i=0;i<aObj.length;i++) {
+  var aObj = document.getElementById('header').getElementsByTagName('a');
+  for(var i=0;i<aObj.length;i++) {
     if(document.location.href.indexOf(aObj[i].href)>=0) {
       aObj[i].className='active';
     }

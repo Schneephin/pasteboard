@@ -1,3 +1,6 @@
+//required for javascript pageloader see main.js function: loadScript  
+//special javascript for register page
+
 /**
  * function handleRegister
  * special handler for the register-form
