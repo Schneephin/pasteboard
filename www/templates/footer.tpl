@@ -1,3 +1,3 @@
 <div>
-    <a href="#">Impressum</a>
+    <a href="about.py"><%=trans.footer.about%></a>
 </div>

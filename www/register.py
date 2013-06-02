@@ -12,7 +12,7 @@ template = "layout.html.tpl"
 tpl = "".join(open(template,'r').readlines())
 
 #define templates to load
-pages = {'header': 'header','footer':'footer','content':'register','sidebar':'sidenav'}
+pages = {'header': 'header','footer':'footer','content':'register'}
 
 #print page
 sys.stdout.write(tpl.format(str(json.dumps(pages))))

@@ -16,11 +16,12 @@
     <body>
         <div id="container">
             <header id="header"></header>
-            <section id="content"></section>
+            <div id="contentouter"><section id="content"></section></div>
             <aside id="sidebar"></aside>
             <footer id="footer"></footer>
         </div>
         <script type="text/javascript">
+            var template,errorHandler ;
             document.addEventListener('DOMContentLoaded', function () {{
                 errorHandler = new ErrorHandler();
                 template = new Template();  
