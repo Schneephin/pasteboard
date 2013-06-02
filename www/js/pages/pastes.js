@@ -1,23 +1,26 @@
-function addToTemplate(result) {
+//required for javascript pageloader see main.js function: loadScript  
+//special javascript for pastes page
 
-    if (result["status"] == 0) { 
-        if (result["result"].state == 'ok') {
-            if (null != result["result"].data ) {
-               template.addData(result["result"].data);
-            }
-        }
-    }
-}
- 
+/**
+ * get data from api and add it via addToTemplate function to template rendering
+ */
 var token = readCookie('tk');
-var data = new Object();
-data['tk'] = token; 
-var params = "data="+encodeURIComponent(JSON.stringify(data)) ;
 
-var rest = new Rest("POST", "api/pasteboard.py/getUser", "json", params);
-var result = rest.handleRequset();
-addToTemplate(result);
+//only if user is logged in we can load data
+if (typeof token != "undefined") {
+    var data = new Object();
+    data['tk'] = token; 
+    var params = "data="+encodeURIComponent(JSON.stringify(data)) ;
 
-var rest = new Rest("POST", "api/pasteboard.py/getPastesList", "json", params);
-var result = rest.handleRequset();
-addToTemplate(result);
+    var rest = new Rest("POST", "api/pasteboard.py/getUser", "json", params);
+    var result = rest.handleRequset();
+    addToTemplate(result);
+
+    var rest = new Rest("POST", "api/pasteboard.py/getPastesList", "json", params);
+    var result = rest.handleRequset();
+    addToTemplate(result);
+
+    var rest = new Rest("POST", "api/pasteboard.py/getAllCategorys", "json", params);
+    var result = rest.handleRequset();
+    addToTemplate(result);
+}

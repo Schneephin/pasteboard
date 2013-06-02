@@ -80,4 +80,9 @@ class Pb:
         except DbTokenError as e:
             raise PasteboardError(e.__str__()) 
 
+    def getAllCategorys(self):
+        cat = Categorys.Category()
+        return cat.getAllCategorys()
+
+
 

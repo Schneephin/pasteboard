@@ -76,6 +76,7 @@ class Pasteboard:
 
     def getPastesList(self):
         token = cgi.escape(json.loads(self.data)['tk'])
+      #  catid = cgi.escape(json.loads(self.data)['cat'])
         if self.checkToken(token):
             result = {'state': 'ok'}
             result['data'] = {
@@ -143,6 +144,26 @@ class Pasteboard:
                 result = {'state': 'error'}
                 result['msg'] = e.__str__()
 
+        self.return_response(result)
+
+    def allCategorys(self):
+        token = cgi.escape(json.loads(self.data)['tk'])
+        result = {'state': 'error'}
+
+        if self.checkToken(token):
+            try :
+                categorys = self.pb.getAllCategorys()
+                result = {'state': 'ok'}
+                result['data'] = {'categorys': categorys}
+            except PasteboardError as e:
+                self.print_headers({"Status": "403 Forbidden"})
+                result['msg'] = e.__str__()
+                pass
+            except Exception as e:
+                result['msg'] = e.__str__()
+        else:
+            self.print_headers({"Status": "403 Forbidden"})
+        
         self.return_response(result)
  
 
@@ -214,6 +235,8 @@ def main():
             pasteboard.getInviteKey()
         elif function == 'register':
             pasteboard.register()
+        elif function == 'getAllCategorys':
+            pasteboard.allCategorys()
         else:
             pasteboard.print_headers({"Status": "404 Not found"})
     except:

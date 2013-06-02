@@ -1,6 +1,6 @@
-<h2></h2>
+<h2><%=trans.tabletitle%></h2>
+<div id="contentinner">
 <table class="pastes">
-    <caption><%=trans.tabletitle%></caption>
     <thead>
         <tr>
             <th><%=trans.pasteId%></th>
@@ -18,3 +18,4 @@
         <% } %>
     </tbody>
 </table>
+</div>
