@@ -18,13 +18,13 @@ CREATE TABLE IF NOT EXISTS pasteboard.pb_pastes(
     group_id INTEGER UNSIGNED NOT NULL ,
     parent_id INTEGER UNSIGNED,
     category_id INTEGER UNSIGNED,
+	user_id INTEGER UNSIGNED,
     PRIMARY KEY(id)
 );
 
 CREATE TABLE IF NOT EXISTS pasteboard.pb_pastescontent (
     id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     paste_id INTEGER UNSIGNED,
-    user_id INTEGER UNSIGNED,
     datum DATETIME,
     content BLOB,
     PRIMARY KEY(id)
