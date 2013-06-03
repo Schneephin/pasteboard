@@ -2,6 +2,7 @@
 from application.handler import *
 from application.db.User import DbUserError
 from application.db.Token import DbTokenError
+from application.db.Paste import DbPasteError
 
 class PasteboardError(Exception):
     """
@@ -83,6 +84,40 @@ class Pb:
     def getAllCategorys(self):
         cat = Categorys.Category()
         return cat.getAllCategorys()
-
-
-
+    
+    def getAllPastesByUser(self, user_id):
+        try:
+            paste = Paste.Paste()
+            return paste.getAllPastesByUser(user_id)
+        except DbPasteError as e:
+            raise PasteboardError(e.__str__()) 
+    
+    def getAllChildPastes(self, paste_id):
+        try:
+            paste = Paste.Paste()
+            return paste.getAllChildPastes(paste_id)
+        except DbPasteError as e:
+            raise PasteboardError(e.__str__()) 
+    
+    def getPasteById(self, paste_id):
+        try:
+            paste = Paste.Paste()
+            return paste.getPasteByID(paste_id)
+        except DbPasteError as e:
+            raise PasteboardError(e.__str__()) 
+    
+    def editPaste(self, paste_id, group_id, parent_id, category_id, user_id, paste_content):
+        try:
+            paste = Paste.Paste()
+            return paste.editPaste(paste_id, group_id, parent_id, category_id, user_id, paste_content)
+        except DbPasteError as e:
+            raise PasteboardError(e.__str__()) 
+    
+    def createNewPaste(self, group_id, parent_id, category_id, user_id, paste_content):
+        try:
+            paste = Paste.Paste()
+            return paste.createNewPaste(group_id, parent_id, category_id, user_id, paste_content)
+        except DbPasteError as e:
+            raise PasteboardError(e.__str__()) 
+    
+    
