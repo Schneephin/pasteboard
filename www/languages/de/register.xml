@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trans>
+    <registertitle>registrierung</registertitle>
+    <name>benutzername:</name>
+    <passwordr>passwort wiederholen:</passwordr>
+    <key>invite-Key:</key>
+    <text><![CDATA[wenn du bereits einen registrierungs key erhalten hast,<br> kannst du dich hier registrieren.]]></text>
+</trans>
+

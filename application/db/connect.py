@@ -1,37 +1,68 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import MySQLdb as mdb 
-import sys
+import pymysql as mdb 
 
+class DB():
 
+    """
+        DB(): 
+        abstract db class with connection information 
 
-class DB ():
+        @package application
+        @version $id$
+        @author Anja Siek <anja.marita@web.de> 
+    """
+    def __init__(self):
+        """
+            __init__ 
+            constructor function set configuration 
+            @todo: put it into config-file
+            @access private
+        """
+        self.mdb = mdb
+        self.connection = None
+        self.config = {
+            'host': "localhost",
+            'user': "pasteboard",
+            'pass': "pasteboard",
+            'db':   "pasteboard"
+        } 
 
-    connection = None
-    config = {
-        'host': "localhost",
-        'user': "pasteboard",
-        'pass': "pasteboard",
-        'db':   "pasteboard"
-    } 
-
-    def connect(self, host, db, user, password):
+    def connect(self):
+        """
+            connect 
+            try to connet to db  
+            @access public
+        """
         try:
             self.connection = mdb.connect(
-                self.config['host'], self.config['db'], self.config['user'], self.config['password'])
+                host = self.config['host'], 
+                db = self.config['db'], 
+                user = self.config['user'], 
+                passwd = self.config['pass'],
+            )
             
-        except mdb.Error, e:
-          
+        except mdb.Error as e:
             return  "Error %d: %s" % (e.args[0], e.args[1])
 
     def getConnection(self):
+        """
+            getConnection 
+            return a db-connection object
+            @access public
+        """
         if not self.connection:
             self.connect()
         return self.connection
 
 
-    def disconnect():
+    def disconnect(self):
+        """
+            disconnect 
+            close connection if exists
+            @access public
+        """
         
         if self.connection:
             self.connection.close()

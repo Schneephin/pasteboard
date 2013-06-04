@@ -5,10 +5,8 @@ header, section, footer, aside, nav, article {
 
 /* LAYOUT ------------------------------------------ */
 @font-face {
-    font-family: AnonymousPro-Regular;
-    local: AnonymousPro-Regular;       
-
-    src: url(fonts/AnonymousPro-Regular.ttf);  
+    font-family: 'AnonymousPro';
+    src: url( fonts/AnonymousPro-Regular.ttf) format('truetype');
 } 
 
 html {
@@ -39,13 +37,24 @@ div#container {
     width: 100%;
 }
 
+h2 {
+    padding:10px 0 10px 60px;
+    margin:0 0 20px 0;
+    color:#555;
+    background-color:#111;
+    border-bottom:3px double #555;
+}
+h3 {
+    font-weight:bold;
+}
+
 /* HEADER & NAVIGATION ------------------------------ */
 
 #header {
     height:86px;
-    padding: 0 15px 20px 0;
+    padding: 0 30px 20px 20px;
     border-bottom: 1px solid #fff; 
-    margin: 0 0 0 20px;
+    margin: 0;
 }
 
 #header div#logo {
@@ -113,39 +122,94 @@ div#container {
 /* CONTENT ------------------------------------------ */
 
 #content {
-    float:left;
-    width: 70%;
-    padding: 0 15px;
-    margin: 0 0 20px 50px;
+    padding: 0 0 20px 0px;
+
 }
+#contentouter {
+    float:left;
+    width: 80%;
+    margin: 0;
+}
+#contentinner {
+    padding: 0 40px 0 60px;
+}
+
 
 #invite {
     float:right;
+    padding-right:20px;
 }
 #invite span {
     cursor:pointer;
     font-weight: bold;
+}
+div#register-form form input{
+    display:block;
+    margin: 15px 30px 0;
+}
+div#info {
+    margin-top:20px;
+    font-size: 16px;
 }
 
 /* SIDEBAR ------------------------------------------ */
 
 aside {
     position:absolute;
-    padding: 0 15px;
+    padding: 0;
     top:108px;
     bottom:40px;
-    width:15%;
+    width:20%;
     right:0;
-    border-left: 1px solid #fff;
+    border-left: 10px double #fff;
+}
+#sidenav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 3px solid #111;
+    border-bottom: 3px solid #111;
+}
+#sidenav ul li ul {
+    margin: 0 ;
+    background-color: rgba(255,255,255,0.1);;
+    border-top: 0px ;
+    border-bottom: 0px ;
+}
+#sidenav ul li ul li {
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+#sidenav ul li {
+    display:block;
+    margin: 0;
+    padding: 0 ;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+}
+#sidenav p {
+    padding: 0 0 0 10px ;
+    margin: 0;
+    font-size: 15px;
+    color: #fff;
+
+    cursor:pointer;
+}
+#sidenav ul li ul li p {
 }
 
+#sidenav p.active ,
+#sidenav p:hover {
+    background-color: #fff;
+    color: #444;
+}
 /* FOOTER ------------------------------------------ */
 
 footer {
     height:40px;
     clear: both;
     text-align: right;
-    border-top: 1px solid #222;
+    border-top: 2px solid #222;
     background: #111;
     position:absolute;
     bottom:0;
@@ -206,6 +270,3 @@ table.pastes tbody tr {
 table.pastes tbody tr:hover {
     background-color: #222;
 }
-
-
-

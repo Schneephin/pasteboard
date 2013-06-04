@@ -15,10 +15,6 @@ var ErrorHandler = function() {
     }
 };
 
-
-
-
-
 /**
  * function handleForm
  * handels form data and uses rest handler to send data
@@ -42,47 +38,11 @@ function handleForm(form, page) {
 }
 
 /**
- * function handleLogin
- * special handler for the login-form
+ * loadScript(url) 
+ * function to load page js from url
  * @author Anja Siek <anja.marita@web.de>
- * @param form
- * @param page
+ * @param url
  */
-function handleLogin(form, page) {
-    var result = handleForm(form, page);
-    
-    if (result["status"] == 0) {
-        if (result["result"].state == 'ok') {
-            if (null != result["result"].data.token) {
-                this.document.location.href = "pastes.py?tk="+result["result"].data.token;
-            } else {
-                errorHandler.handel("failed to load data");n
-            }
-        } else {
-            if (null != result["result"].msg) {n
-                errorHandler.handel(result["result"].msg);
-            } else {
-                errorHandler.handel("failed to load data");
-            }
-        }
-    } else {
-        errorHandler.handel("your login-Data was not correct please register or try again");
-    }
-}
-
-function invite()
-{
-    var rest = new Rest("POST", "api/pasteboard.py/getInviteKey", "json","");
-    var result = rest.handleRequset(); 
-    if (result["status"] == 0) {
-        if (result["result"].state == 'ok') {
-            if (null != result["result"].data.invkey ) {
-                alert('inviteKey: '+ result["result"].data.invkey);
-            }
-        }
-    }
-}
-
 function loadScript(url)
 {
     // adding the script tag to the head as suggested before
@@ -94,7 +54,32 @@ function loadScript(url)
    // fire the loading
    head.appendChild(script);
 }
+/**
+ * logout
+ * function to log the user out from page
+ * removes cookie with the login-token
+ */
+function logout()
+{
+    deleteCookie("tk");
+    window.location.pathname = "";
+}
+/**
+ * function addToTemplate
+ * function to add data to template
+ * @autor Anja Siek <anja.marita@web.de>
+ * @param result
+ */
+function addToTemplate(result) {
 
+    if (result["status"] == 0) { 
+        if (result["result"].state == 'ok') {
+            if (null != result["result"].data ) {
+               template.addData(result["result"].data);
+            }
+        }
+    }
+}
 /**
  * upstream code comes from: http://www.quirksmode.org/js/cookies.html
  */
@@ -108,12 +93,16 @@ function readCookie(name) {
     }
     return null;
 }
+function deleteCookie(name)
+{
+    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
 /**
  * upstream code comes from:
  */
 function setActive() {
-  aObj = document.getElementById('header').getElementsByTagName('a');
-  for(i=0;i<aObj.length;i++) {
+  var aObj = document.getElementById('header').getElementsByTagName('a');
+  for(var i=0;i<aObj.length;i++) {
     if(document.location.href.indexOf(aObj[i].href)>=0) {
       aObj[i].className='active';
     }
