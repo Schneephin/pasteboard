@@ -98,6 +98,13 @@ class Pb:
             return paste.getAllChildPastes(paste_id)
         except DbPasteError as e:
             raise PasteboardError(e.__str__()) 
+        
+    def getAllPastesByCategory(self, category_id):
+        try:
+            paste = Paste.Paste()
+            return paste.getAllPastesByCategory(category_id)
+        except DbPasteError as e:
+            raise PasteboardError(e.__str__()) 
     
     def getPasteById(self, paste_id):
         try:
