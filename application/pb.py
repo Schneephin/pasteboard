@@ -113,17 +113,17 @@ class Pb:
         except DbPasteError as e:
             raise PasteboardError(e.__str__()) 
     
-    def editPaste(self, paste_id, group_id, parent_id, category_id, user_id, paste_content):
+    def editPaste(self, paste_id, group_id, parent_id, category_id, user_id, paste_content, title):
         try:
             paste = Paste.Paste()
-            return paste.editPaste(paste_id, group_id, parent_id, category_id, user_id, paste_content)
+            return paste.editPaste(paste_id, group_id, parent_id, category_id, user_id, paste_content, title)
         except DbPasteError as e:
             raise PasteboardError(e.__str__()) 
     
-    def createNewPaste(self, group_id, parent_id, category_id, user_id, paste_content):
+    def createNewPaste(self, group_id, parent_id, category_id, user_id, paste_content, title):
         try:
             paste = Paste.Paste()
-            return paste.createNewPaste(group_id, parent_id, category_id, user_id, paste_content)
+            return paste.createNewPaste(group_id, parent_id, category_id, user_id, paste_content, title)
         except DbPasteError as e:
             raise PasteboardError(e.__str__()) 
     

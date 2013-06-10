@@ -74,28 +74,62 @@ class Pasteboard:
         
         self.return_response(result)
 
-    def getPastesList(self):
+    def getPastesListByUser(self):
         token = cgi.escape(json.loads(self.data)['tk'])
+        user = self.pb.getUser(token)
       #  catid = cgi.escape(json.loads(self.data)['cat'])
         if self.checkToken(token):
+            pastes = self.pb.getAllPastesByUser(user[0])
+            
+            pasteList = []
+            
+            for paste in pastes:
+                pasteDic = {'title' : paste[7], 'id': paste[0], 'date': paste[6], 'content': paste[5]}
+                pasteList.append(pasteDic)
+            
             result = {'state': 'ok'}
             result['data'] = {
-                'pastes':[
-                    {
-                        'title': 'pasteboard-api',
-                        'id': 1,
-                        'date':'04.05.2013 11:22:17'
-                    },
-                    {
-                        'title': 'pasteboard-home.html',
-                        'id': 2,
-                        'date':'02.05.2013 10:11:01'
-                    }
-                ]
+                'pastes': pasteList
             }
+            
             self.return_response(result)
         else:
             self.print_headers({"Status": "403 Forbidden"})
+            
+    def createPaste(self):
+        """
+            createPaste 
+            create a new Paste
+            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
+            @access public
+        """
+        group_id = cgi.escape(json.loads(self.data)['group'])
+        parent_id = cgi.escape(json.loads(self.data)['parent'])     
+        category_id = cgi.escape(json.loads(self.data)['category']) 
+        user = self.pb.getUser(cgi.escape(json.loads(self.data)['tk']))
+        paste_content = cgi.escape(json.loads(self.data)['content'])   
+ 
+        if not parent_id:
+            parent_id = 0
+        if not category_id:    
+            category_id = 0
+            
+        if not paste_content:
+            result = {'state': 'error'} 
+            result['msg'] = 'no paste content'       
+        elif not user or not user[0] > 0:
+            result = {'state': 'error'}
+            result['msg'] = 'invalid user'
+        else:
+            try:
+                paste_id = self.pb.createNewPaste(group_id, parent_id, category_id, user[0], paste_content)
+                result = {'state': 'ok'}
+                result['data'] = {'paste_id': paste_id }
+            except Exception as e:
+                result = {'state': 'error'}
+                result['msg'] = e.__str__()
+            
+        self.return_response(result)
    
     def getInviteKey(self):
         """
@@ -230,9 +264,11 @@ def main():
         elif function == 'getUser':
             pasteboard.getUser()
         elif function == 'getPastesList':
-            pasteboard.getPastesList()
+            pasteboard.getPastesListByUser()
         elif function == 'getInviteKey':
             pasteboard.getInviteKey()
+        elif function == 'createPaste':
+            pasteboard.createPaste()
         elif function == 'register':
             pasteboard.register()
         elif function == 'getAllCategorys':
@@ -244,4 +280,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
