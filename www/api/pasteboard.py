@@ -75,6 +75,12 @@ class Pasteboard:
         self.return_response(result)
 
     def getPastesListByUser(self):
+        """
+            getPastesListByUser 
+            get a list of all paste created by a user
+            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
+            @access public
+        """
         token = cgi.escape(json.loads(self.data)['tk'])
         user = self.pb.getUser(token)
       #  catid = cgi.escape(json.loads(self.data)['cat'])
@@ -84,7 +90,35 @@ class Pasteboard:
             pasteList = []
             
             for paste in pastes:
-                pasteDic = {'title' : paste[7], 'id': paste[0], 'date': paste[6], 'content': paste[5]}
+                pasteDic = {'title' : paste[6], 'id': paste[0], 'date': paste[5], 'content': paste[4]}
+                pasteList.append(pasteDic)
+            
+            result = {'state': 'ok'}
+            result['data'] = {
+                'pastes': pasteList
+            }
+            
+            self.return_response(result)
+        else:
+            self.print_headers({"Status": "403 Forbidden"})
+            
+    def getPastesListByCategory(self):
+        """
+            getPastesListByCategory 
+            get a list of all paste in a category
+            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
+            @access public
+        """
+        token = cgi.escape(json.loads(self.data)['tk'])
+        catid = cgi.escape(json.loads(self.data)['cat'])
+      
+        if self.checkToken(token):
+            pastes = self.pb.getAllPastesByCategory(catid)
+            
+            pasteList = []
+            
+            for paste in pastes:
+                pasteDic = {'title' : paste[6], 'id': paste[0], 'date': paste[5], 'content': paste[4]}
                 pasteList.append(pasteDic)
             
             result = {'state': 'ok'}
@@ -103,7 +137,6 @@ class Pasteboard:
             @author Christian Wenzlick <christian.wenzlick@siemens.com> 
             @access public
         """
-        group_id = cgi.escape(json.loads(self.data)['group'])
         parent_id = cgi.escape(json.loads(self.data)['parent'])     
         category_id = cgi.escape(json.loads(self.data)['category']) 
         user = self.pb.getUser(cgi.escape(json.loads(self.data)['tk']))
@@ -122,7 +155,7 @@ class Pasteboard:
             result['msg'] = 'invalid user'
         else:
             try:
-                paste_id = self.pb.createNewPaste(group_id, parent_id, category_id, user[0], paste_content)
+                paste_id = self.pb.createNewPaste(parent_id, category_id, user[0], paste_content)
                 result = {'state': 'ok'}
                 result['data'] = {'paste_id': paste_id }
             except Exception as e:
@@ -263,8 +296,10 @@ def main():
             pasteboard.login()
         elif function == 'getUser':
             pasteboard.getUser()
-        elif function == 'getPastesList':
+        elif function == 'getPastesListByUser':
             pasteboard.getPastesListByUser()
+        elif function == "getPastesListByCategory":
+            pasteboard.getPastesListByCategory()
         elif function == 'getInviteKey':
             pasteboard.getInviteKey()
         elif function == 'createPaste':

@@ -13,11 +13,10 @@ class Paste:
         # create class-var DB-Paste
         self.dbPaste = dbPaste()
 
-    def createNewPaste(self, group_id, parent_id, category_id, user_id, paste_content, title):
+    def createNewPaste(self, parent_id, category_id, user_id, paste_content, title):
         """
             createNewPaste
             function to create a new paste
-            @param group_id Group Id for the new paste
             @param parent_id Id of this pastes parent
             @param category_id Category Id for this paste
             @param user_id Id of the creating user
@@ -26,7 +25,7 @@ class Paste:
             @access public
         """
         
-        paste_id = self.dbPaste.createNewPaste(group_id, parent_id, category_id, user_id, paste_content, title)    
+        paste_id = self.dbPaste.createNewPaste(parent_id, category_id, user_id, paste_content, title)    
         
         return paste_id
         
@@ -78,12 +77,11 @@ class Paste:
         
         return paste
         
-    def editPaste(self, paste_id, group_id, parent_id, category_id, user_id, paste_content, title):
+    def editPaste(self, paste_id, parent_id, category_id, user_id, paste_content, title):
         """
             editPaste
             function to edit a paste
             @param paste_id Id of the paste
-            @param group_id Group Id for the new paste
             @param parent_id Id of this pastes parent
             @param category_id Category Id for this paste
             @param user_id Id of the editing user
@@ -92,7 +90,7 @@ class Paste:
             @access public
         """
             
-        self.dbPaste.editPaste(paste_id, group_id, parent_id, category_id, user_id, paste_content, title)    
+        self.dbPaste.editPaste(paste_id, parent_id, category_id, user_id, paste_content, title)    
     
         
         

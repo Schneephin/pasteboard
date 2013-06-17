@@ -86,6 +86,12 @@ class Pb:
         return cat.getAllCategorys()
     
     def getAllPastesByUser(self, user_id):
+        """
+            getAllPastesByUser 
+            get all pastes created by a user
+            @author: Christian Wenzlick
+            @access public
+        """
         try:
             paste = Paste.Paste()
             return paste.getAllPastesByUser(user_id)
@@ -93,6 +99,12 @@ class Pb:
             raise PasteboardError(e.__str__()) 
     
     def getAllChildPastes(self, paste_id):
+        """
+            getAllChildPastes 
+            get all pastes which are children of a given paste
+            @author: Christian Wenzlick
+            @access public
+        """
         try:
             paste = Paste.Paste()
             return paste.getAllChildPastes(paste_id)
@@ -100,6 +112,12 @@ class Pb:
             raise PasteboardError(e.__str__()) 
         
     def getAllPastesByCategory(self, category_id):
+        """
+            getAllPastesByCategory 
+            get all pastes in a category
+            @author: Christian Wenzlick
+            @access public
+        """
         try:
             paste = Paste.Paste()
             return paste.getAllPastesByCategory(category_id)
@@ -107,23 +125,41 @@ class Pb:
             raise PasteboardError(e.__str__()) 
     
     def getPasteById(self, paste_id):
+        """
+            getPasteById 
+            get the paste with a given id
+            @author: Christian Wenzlick
+            @access public
+        """
         try:
             paste = Paste.Paste()
             return paste.getPasteByID(paste_id)
         except DbPasteError as e:
             raise PasteboardError(e.__str__()) 
     
-    def editPaste(self, paste_id, group_id, parent_id, category_id, user_id, paste_content, title):
+    def editPaste(self, paste_id, parent_id, category_id, user_id, paste_content, title):
+        """
+            editPaste 
+            edit an existing paste
+            @author: Christian Wenzlick
+            @access public
+        """
         try:
             paste = Paste.Paste()
-            return paste.editPaste(paste_id, group_id, parent_id, category_id, user_id, paste_content, title)
+            return paste.editPaste(paste_id, parent_id, category_id, user_id, paste_content, title)
         except DbPasteError as e:
             raise PasteboardError(e.__str__()) 
     
-    def createNewPaste(self, group_id, parent_id, category_id, user_id, paste_content, title):
+    def createNewPaste(self, parent_id, category_id, user_id, paste_content, title):
+        """
+            createNewPaste 
+            create a new paste
+            @author: Christian Wenzlick
+            @access public
+        """
         try:
             paste = Paste.Paste()
-            return paste.createNewPaste(group_id, parent_id, category_id, user_id, paste_content, title)
+            return paste.createNewPaste(parent_id, category_id, user_id, paste_content, title)
         except DbPasteError as e:
             raise PasteboardError(e.__str__()) 
     
