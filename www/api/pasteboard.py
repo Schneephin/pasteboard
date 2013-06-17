@@ -140,7 +140,8 @@ class Pasteboard:
         parent_id = cgi.escape(json.loads(self.data)['parent'])     
         category_id = cgi.escape(json.loads(self.data)['category']) 
         user = self.pb.getUser(cgi.escape(json.loads(self.data)['tk']))
-        paste_content = cgi.escape(json.loads(self.data)['content'])   
+        paste_content = cgi.escape(json.loads(self.data)['content'])
+        title = cgi.escape(json.loads(self.data)['title'])		
  
         if not parent_id:
             parent_id = 0
@@ -153,9 +154,12 @@ class Pasteboard:
         elif not user or not user[0] > 0:
             result = {'state': 'error'}
             result['msg'] = 'invalid user'
+        elif not title:
+            result = {'state': 'error'}
+            result['msg'] = 'no title'
         else:
             try:
-                paste_id = self.pb.createNewPaste(parent_id, category_id, user[0], paste_content)
+                paste_id = self.pb.createNewPaste(parent_id, category_id, user[0], paste_content, title)
                 result = {'state': 'ok'}
                 result['data'] = {'paste_id': paste_id }
             except Exception as e:

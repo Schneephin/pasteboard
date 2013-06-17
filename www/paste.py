@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import cgi, sys
 from lib import *
 import json
@@ -22,7 +22,7 @@ else:
     if not c:
         #set toke to cookie
         sys.stdout.write(cookie.set("tk",token))
-
+        
     header ={}
     header['Content-type'] = 'text/html'
     basics.print_headers(header)
@@ -31,7 +31,8 @@ else:
     tpl = "".join(open(template,'r').readlines())
     
     #define templates to load
-    pages = {'header': 'headerloggedin','footer':'footer','content':'pastes','sidebar':'sidenav'}
+    pages = {'header': 'headerloggedin','footer':'footer','content':'paste','sidebar':'sidenav'}
 
     #print page
     sys.stdout.write(tpl.format(str(json.dumps(pages))))
+
