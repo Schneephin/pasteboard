@@ -76,22 +76,13 @@ class Pasteboard:
 
     def getPastesList(self):
         token = cgi.escape(json.loads(self.data)['tk'])
-      #  catid = cgi.escape(json.loads(self.data)['cat'])
+        catid = int(cgi.escape(json.loads(self.data)['cat']))
+        if not catid:
+            catid = 0
         if self.checkToken(token):
             result = {'state': 'ok'}
             result['data'] = {
-                'pastes':[
-                    {
-                        'title': 'pasteboard-api',
-                        'id': 1,
-                        'date':'04.05.2013 11:22:17'
-                    },
-                    {
-                        'title': 'pasteboard-home.html',
-                        'id': 2,
-                        'date':'02.05.2013 10:11:01'
-                    }
-                ]
+                'pastes': self.pb.getAllPastesByCategory(catid)
             }
             self.return_response(result)
         else:
@@ -190,7 +181,7 @@ class Pasteboard:
         """
         # return access-Token
         self.print_headers({"Content-Type": "text/html"})
-        sys.stdout.write(json.dumps(result))
+        sys.stdout.write(json.dumps(result, default=str))
 
     def print_headers(self,headers):
         """

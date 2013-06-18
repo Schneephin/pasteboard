@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS pasteboard.pb_pastescontent (
     id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     paste_id INTEGER UNSIGNED,
     datum DATETIME,
+    title VARCHAR(254),
     content BLOB,
     PRIMARY KEY(id)
 );

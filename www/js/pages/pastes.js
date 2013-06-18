@@ -16,11 +16,24 @@ if (typeof token != "undefined") {
     var result = rest.handleRequset();
     addToTemplate(result);
 
+    var rest = new Rest("POST", "api/pasteboard.py/getAllCategorys", "json", params);
+    var result = rest.handleRequset();
+    addToTemplate(result);
+
+    data['cat'] = "0"; 
+    var params = "data="+encodeURIComponent(JSON.stringify(data)) ;
     var rest = new Rest("POST", "api/pasteboard.py/getPastesList", "json", params);
     var result = rest.handleRequset();
     addToTemplate(result);
 
-    var rest = new Rest("POST", "api/pasteboard.py/getAllCategorys", "json", params);
+}
+
+function filterPastes(categoryid)
+{
+    data['cat'] = categoryid;
+    var params = "data="+encodeURIComponent(JSON.stringify(data)) ;
+    var rest = new Rest("POST", "api/pasteboard.py/getPastesList", "json", params);
     var result = rest.handleRequset();
     addToTemplate(result);
+    template.render("pastes","content");
 }

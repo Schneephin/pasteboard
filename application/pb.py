@@ -1,6 +1,7 @@
 
 from application.handler import *
 from application.db.User import DbUserError
+from application.db.Categorys import DbCategoryError
 from application.db.Token import DbTokenError
 from application.db.Paste import DbPasteError
 
@@ -102,7 +103,12 @@ class Pb:
     def getAllPastesByCategory(self, category_id):
         try:
             paste = Paste.Paste()
-            return paste.getAllPastesByCategory(category_id)
+            cat = Categorys.Category()
+            subcategorys = cat.findAllCategorys(category_id)
+            allpastes = []
+            for category in subcategorys:
+                allpastes.extend(paste.getAllPastesByCategory(category))
+            return allpastes
         except DbPasteError as e:
             raise PasteboardError(e.__str__()) 
     
@@ -126,5 +132,16 @@ class Pb:
             return paste.createNewPaste(group_id, parent_id, category_id, user_id, paste_content)
         except DbPasteError as e:
             raise PasteboardError(e.__str__()) 
+    def saveCategorys(self, categorystring):
+        try:
+            cat = Categorys.Category()
+            return cat.saveCategorys(categorystring)
+        except DbCategoryError as e:
+            raise PasteboardError(e.__str__())
     
-    
+    def findAllCategorys(self,categoryid):
+        try:
+            cat = Categorys.Category()
+            return cat.findAllCategorys(categoryid)
+        except DbCategoryError as e:
+            raise PasteboardError(e.__str__())

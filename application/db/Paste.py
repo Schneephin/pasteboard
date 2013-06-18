@@ -122,20 +122,18 @@ class Paste(DB):
         
         self.getConnection()
         cursor = self.connection.cursor(self.mdb.cursors.DictCursor) 
-        cursor.execute('''    SELECT 
+        cursor.execute('''  SELECT 
                             pb_pastes.id as paste_id,
                             pb_pastes.group_id as group_id,
                             pb_pastes.parent_id as parent_id,
                             pb_pastes.category_id as category_id,
                             pb_pastes.user_id as user_id,
-                            pb_pastescontent.content as paste_content,
-                            pb_pastescontetn.datum as datum
+                            pb_pastescontent.datum as datum,
+                            pb_pastescontent.title as title
                         FROM pb_pastes JOIN pb_pastescontent ON pb_pastes.id = pb_pastescontent.paste_id 
-                        WHERE pb_pastes.category_id = %i''',category_id)
+                        WHERE pb_pastes.category_id = %s''',(category_id))
         pastes = cursor.fetchall()
-        self.getConnection().commit()
-        self.disconnect()
-        
+        cursor.close() 
         return pastes
     
     def getPasteByID (self, paste_id):
