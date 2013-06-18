@@ -78,52 +78,26 @@ class Pasteboard:
         """
             getPastesListByUser 
             get a list of all paste created by a user
-            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
+            @author Christian Wenzlick <christian.wenzlick@siemens.com>
             @access public
         """
         token = cgi.escape(json.loads(self.data)['tk'])
         catid = int(cgi.escape(json.loads(self.data)['cat']))
         if not catid:
             catid = 0
+        
         if self.checkToken(token):
             
             result = {'state': 'ok'}
             result['data'] = {
                 'pastes': self.pb.getAllPastesByCategory(catid)
-            }
+            pastes = self.pb.getAllPastesByUser(user[0])
             
+            }
             self.return_response(result)
         else:
             self.print_headers({"Status": "403 Forbidden"})
-            
-   # def getPastesListByCategory(self):
-   #     """
-   #         getPastesListByCategory 
-   #         get a list of all paste in a category
-   #         @author Christian Wenzlick <christian.wenzlick@siemens.com> 
-   #         @access public
-   #     """
-   #     token = cgi.escape(json.loads(self.data)['tk'])
-   #     catid = cgi.escape(json.loads(self.data)['cat'])
-   #   
-   #     if self.checkToken(token):
-   #         pastes = self.pb.getAllPastesByCategory(catid)
-   #         
-   #         pasteList = []
-   #         
-   #         for paste in pastes:
-   #             pasteDic = {'title' : paste[6], 'id': paste[0], 'date': paste[5], 'content': paste[4]}
-   #             pasteList.append(pasteDic)
-   #         
-   #         result = {'state': 'ok'}
-   #         result['data'] = {
-   #             'pastes': pasteList
-   #         }
-   #         
-   #         self.return_response(result)
-   #     else:
-   #         self.print_headers({"Status": "403 Forbidden"})
-   #         
+   
     def createPaste(self):
         """
             createPaste 
@@ -294,8 +268,10 @@ def main():
             pasteboard.login()
         elif function == 'getUser':
             pasteboard.getUser()
-        elif function == 'getPastesList':
-            pasteboard.getPastesList()
+        elif function == 'getPastesListByUser':
+            pasteboard.getPastesListByUser()
+        elif function == "getPastesListByCategory":
+            pasteboard.getPastesListByCategory()
         elif function == 'getInviteKey':
             pasteboard.getInviteKey()
         elif function == 'createPaste':
