@@ -75,18 +75,92 @@ class Pasteboard:
         self.return_response(result)
 
     def getPastesList(self):
+        """
+            getPastesListByUser 
+            get a list of all paste created by a user
+            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
+            @access public
+        """
         token = cgi.escape(json.loads(self.data)['tk'])
         catid = int(cgi.escape(json.loads(self.data)['cat']))
         if not catid:
             catid = 0
         if self.checkToken(token):
+            
             result = {'state': 'ok'}
             result['data'] = {
                 'pastes': self.pb.getAllPastesByCategory(catid)
             }
+            
             self.return_response(result)
         else:
             self.print_headers({"Status": "403 Forbidden"})
+            
+   # def getPastesListByCategory(self):
+   #     """
+   #         getPastesListByCategory 
+   #         get a list of all paste in a category
+   #         @author Christian Wenzlick <christian.wenzlick@siemens.com> 
+   #         @access public
+   #     """
+   #     token = cgi.escape(json.loads(self.data)['tk'])
+   #     catid = cgi.escape(json.loads(self.data)['cat'])
+   #   
+   #     if self.checkToken(token):
+   #         pastes = self.pb.getAllPastesByCategory(catid)
+   #         
+   #         pasteList = []
+   #         
+   #         for paste in pastes:
+   #             pasteDic = {'title' : paste[6], 'id': paste[0], 'date': paste[5], 'content': paste[4]}
+   #             pasteList.append(pasteDic)
+   #         
+   #         result = {'state': 'ok'}
+   #         result['data'] = {
+   #             'pastes': pasteList
+   #         }
+   #         
+   #         self.return_response(result)
+   #     else:
+   #         self.print_headers({"Status": "403 Forbidden"})
+   #         
+    def createPaste(self):
+        """
+            createPaste 
+            create a new Paste
+            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
+            @access public
+        """
+        parent_id = cgi.escape(json.loads(self.data)['parent'])     
+        category_id = cgi.escape(json.loads(self.data)['category']) 
+        user = self.pb.getUser(cgi.escape(json.loads(self.data)['tk']))
+        paste_content = cgi.escape(json.loads(self.data)['content'])
+        title = cgi.escape(json.loads(self.data)['title'])		
+ 
+        if not parent_id:
+            parent_id = 0
+        if not category_id:    
+            category_id = 0
+            
+        if not paste_content:
+            result = {'state': 'error'} 
+            result['msg'] = 'no paste content'       
+        elif not user or not user[0] > 0:
+            result = {'state': 'error'}
+            result['msg'] = 'invalid user'
+        elif not title:
+            result = {'state': 'error'}
+            result['msg'] = 'no title'
+        else:
+            try:
+                paste_id = self.pb.createNewPaste(parent_id, category_id, user[0], paste_content, title)
+                result = {'state': 'ok'}
+                result['data'] = {'paste_id': paste_id }
+            except Exception as e:
+                result = {'state': 'error'}
+                result['msg'] = e.__str__()
+            
+        self.return_response(result)
    
     def getInviteKey(self):
         """
@@ -215,24 +289,27 @@ def main():
     
     # check if called api-function exists if yes call it
     # if not return with 404 not found
-    try:
-        if function == 'login':
-            pasteboard.login()
-        elif function == 'getUser':
-            pasteboard.getUser()
-        elif function == 'getPastesList':
-            pasteboard.getPastesList()
-        elif function == 'getInviteKey':
-            pasteboard.getInviteKey()
-        elif function == 'register':
-            pasteboard.register()
-        elif function == 'getAllCategorys':
-            pasteboard.allCategorys()
-        else:
-            pasteboard.print_headers({"Status": "404 Not found"})
-    except:
+   # try:
+    if function == 'login':
+        pasteboard.login()
+    elif function == 'getUser':
+        pasteboard.getUser()
+    elif function == 'getPastesList':
+        pasteboard.getPastesList()
+    elif function == "getPastesListByCategory":
+        pasteboard.getPastesListByCategory()
+    elif function == 'getInviteKey':
+        pasteboard.getInviteKey()
+    elif function == 'createPaste':
+        pasteboard.createPaste()
+    elif function == 'register':
+        pasteboard.register()
+    elif function == 'getAllCategorys':
+        pasteboard.allCategorys()
+    else:
         pasteboard.print_headers({"Status": "404 Not found"})
+   # except:
+   #     pasteboard.print_headers({"Status": "404 Not found"})
 
 if __name__ == '__main__':
     main()
-

@@ -237,6 +237,11 @@ form input[type='password']{
 button {
     cursor:pointer;
 }
+
+form textarea{
+    background: #000;
+    color:#fff;
+}
 /* TABLE -------------------------------------------- */
 
 table {

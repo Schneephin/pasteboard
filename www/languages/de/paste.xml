@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trans>
+    <tabletitle>paste</tabletitle>
+    <createPaste>Neuen Paste anlegen</createPaste>
+    <pasteTitle>Titel</pasteTitle>
+    <pasteContent>Inhalt</pasteContent>
+    <pasteSubmit>Anlegen</pasteSubmit>
+    <pasteCategory>Kategorie</pasteCategory>
+</trans>

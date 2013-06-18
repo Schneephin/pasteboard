@@ -15,7 +15,6 @@ CREATE TABLE IF NOT EXISTS pasteboard.pb_userdata(
 
 CREATE TABLE IF NOT EXISTS pasteboard.pb_pastes(
     id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-    group_id INTEGER UNSIGNED NOT NULL ,
     parent_id INTEGER UNSIGNED,
     category_id INTEGER UNSIGNED,
 	user_id INTEGER UNSIGNED,
