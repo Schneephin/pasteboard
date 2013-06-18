@@ -15,8 +15,8 @@
                 <name><![CDATA[pastes]]></name>
         </navl>
         <navl>
-                <url><![CDATA[groups.py]]></url>
-                <name><![CDATA[gruppen]]></name>
+                <url><![CDATA[paste.py]]></url>
+                <name><![CDATA[paste anlegen]]></name>
         </navl>
 
         <nav>

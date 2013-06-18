@@ -24,15 +24,15 @@ class Paste(DB):
         # call parent init-method
         super().__init__()
         
-    def createNewPaste(self, group_id, parent_id, category_id, user_id, paste_content):
+    def createNewPaste(self, parent_id, category_id, user_id, paste_content, title):
         """
             createNewPaste 
             function to create a new paste
-            @param group_id Group Id for the new paste
             @param parent_id Id of this pastes parent
             @param category_id Category Id for this paste
             @param user_id Id of the creating user
             @param paste_content Content of the paste
+            @param title The title of the paste
             @access public
         """
         
@@ -40,14 +40,16 @@ class Paste(DB):
             raise DbPasteError("No user ID submitted")
         if not paste_content:
             raise DbPasteError("No content submitted")
+        if not title:
+            raise DbPasteError("No title submitted")
 
         self.getConnection()
         cursor  = self.connection.cursor()
                 
-        cursor.execute('INSERT INTO pb_pastes (group_id, parent_id, category_id, user_id)  VALUES (%i, %i, %i, %i)',(group_id, parent_id, category_id, user_id))
+        cursor.execute('INSERT INTO pb_pastes (parent_id, category_id, user_id)  VALUES (%i, %i, %i, %i)',(parent_id, category_id, user_id))
         paste_id = self.connection.insert_id()
         self.getConnection().commit()
-        cursor.execute('INSERT INTO pb_pastescontent (paste_id, content, datum)  VALUES (%i, %s, date())',(paste_id, paste_content))
+        cursor.execute('INSERT INTO pb_pastescontent (paste_id, content, datum, title)  VALUES (%i, %s, date(), %s)',(paste_id, paste_content, title))
         self.getConnection().commit()
         self.disconnect()
         
@@ -68,12 +70,12 @@ class Paste(DB):
         cursor = self.connection.cursor(self.mdb.cursors.DictCursor) 
         cursor.execute('''SELECT 
                         pb_pastes.id as paste_id,
-                        pb_pastes.group_id as group_id,
                         pb_pastes.parent_id as parent_id,
                         pb_pastes.category_id as category_id,
                         pb_pastes.user_id as user_id,
                         pb_pastescontent.content as paste_content,
-                        pb_pastescontetn.datum as datum
+                        pb_pastescontent.datum as datum,
+                        pb_pastescontent.title as title
                     FROM pb_pastes JOIN pb_pastescontent ON pb_pastes.id = pb_pastescontent.paste_id 
                     WHERE pb_pastes.user_id = %i''',user_id)
         pastes = cursor.fetchall()
@@ -96,18 +98,44 @@ class Paste(DB):
         cursor = self.connection.cursor(self.mdb.cursors.DictCursor) 
         cursor.execute('''    SELECT 
                             pb_pastes.id as paste_id,
-                            pb_pastes.group_id as group_id,
                             pb_pastes.parent_id as parent_id,
                             pb_pastes.category_id as category_id,
                             pb_pastes.user_id as user_id,
                             pb_pastescontent.content as paste_content,
-                            pb_pastescontetn.datum as datum
+                            pb_pastescontetn.datum as datum,
+                            pb_pastescontent.title as title
                         FROM pb_pastes JOIN pb_pastescontent ON pb_pastes.id = pb_pastescontent.paste_id 
                         WHERE pb_pastes.parent_id = %i''',paste_id)
         pastes = cursor.fetchall()
         self.getConnection().commit()
         self.disconnect()
         
+        return pastes
+    
+    def getAllPastesByCategory(self, category_id):
+        """
+            getAllPastesByCategory 
+            function to get all pastes in a category
+            @param category_id ID of the category
+            @access public
+        """
+        if not category_id:
+            raise DbPasteError("No category ID submitted")
+        
+        self.getConnection()
+        cursor = self.connection.cursor(self.mdb.cursors.DictCursor) 
+        cursor.execute('''  SELECT 
+                            pb_pastes.id as paste_id,
+                            pb_pastes.parent_id as parent_id,
+                            pb_pastes.category_id as category_id,
+                            pb_pastes.user_id as user_id,
+                            pb_pastescontent.content as paste_content,
+                            pb_pastescontent.datum as datum,
+                            pb_pastescontent.title as title
+                        FROM pb_pastes JOIN pb_pastescontent ON pb_pastes.id = pb_pastescontent.paste_id 
+                        WHERE pb_pastes.category_id = %s''',(category_id))
+        pastes = cursor.fetchall()
+        cursor.close() 
         return pastes
     
     def getPasteByID (self, paste_id):
@@ -124,12 +152,12 @@ class Paste(DB):
         cursor = self.connection.cursor(self.mdb.cursors.DictCursor) 
         cursor.execute('''SELECT 
                     pb_pastes.id as paste_id,
-                    pb_pastes.group_id as group_id,
                     pb_pastes.parent_id as parent_id,
                     pb_pastes.category_id as category_id,
                     pb_pastes.user_id as user_id,
                     pb_pastescontent.content as paste_content,
-                    pb_pastescontetn.datum as datum
+                    pb_pastescontetn.datum as datum,
+                    pb_pastescontent.title as title
                 FROM pb_pastes JOIN pb_pastescontent ON pb_pastes.id = pb_pastescontent.paste_id 
                 WHERE pb_pastes.id = %i''',paste_id)
         paste = cursor.fetchone()
@@ -142,16 +170,16 @@ class Paste(DB):
 
         return paste
       
-    def editPaste(self, paste_id, group_id, parent_id, category_id, user_id, paste_content):
+    def editPaste(self, paste_id, parent_id, category_id, user_id, paste_content, title):
         """
             editPaste
             function to edit a paste
             @param paste_id Id of the paste
-            @param group_id Group Id for the new paste
             @param parent_id Id of this pastes parent
             @param category_id Category Id for this paste
             @param user_id Id of the editing user
             @param paste_content Content of the paste
+            @param title Title of the paste
             @access public
         """
         
@@ -162,16 +190,16 @@ class Paste(DB):
         cursor  = self.connection.cursor()
 
         cursor.execute('''UPDATE pb_pastes
-                            SET group_id=%i,
-                                user_id=%i,
+                            SET user_id=%i,
                                 parent_id=%i,
                                 category_id=%i
-                            WHERE id=%i''',(group_id, user_id, parent_id, category_id, paste_id))
+                            WHERE id=%i''',(user_id, parent_id, category_id, paste_id))
         paste_id = self.connection.insert_id()
         self.getConnection().commit()
         cursor.execute('''UPDATE pb_pastescontent
                             SET datum=date(),
-                                content=%s
-                            WHERE paste_id=%i''',(paste_content, paste_id))
+                                content=%s,
+                                title=%s
+                            WHERE paste_id=%i''',(paste_content, paste_id, title))
         self.getConnection().commit()
         self.disconnect()

@@ -1,0 +1,18 @@
+/*
+* Fremdcode:
+*
+* /www/js/xml2array.js
+* www.openjs.com/scripts/xml_parser/
+* ----------------------------------
+*
+* /www/js/micro-template.js
+* ejohn.org/blog/javascript-micro-templating/
+* ----------------------------------
+*
+* Alle Files in den Unterordnern unter /www/codemirrorBare/ sind Teil von CodeMirror.
+* http://codemirror.net/
+*
+* Eigenentwicklungen in diesem Ordner:
+* codeEditor.js - author Christian Wenzlick
+* codeEditorDemo.html - author Christian Wenzlick
+*/

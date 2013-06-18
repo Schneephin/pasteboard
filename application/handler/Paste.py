@@ -13,19 +13,19 @@ class Paste:
         # create class-var DB-Paste
         self.dbPaste = dbPaste()
 
-    def createNewPaste(self, group_id, parent_id, category_id, user_id, paste_content):
+    def createNewPaste(self, parent_id, category_id, user_id, paste_content, title):
         """
             createNewPaste
             function to create a new paste
-            @param group_id Group Id for the new paste
             @param parent_id Id of this pastes parent
             @param category_id Category Id for this paste
             @param user_id Id of the creating user
             @param paste_content Content of the paste
+            @param title Title of the paste
             @access public
         """
         
-        paste_id = self.dbPaste.createNewPaste(group_id, parent_id, category_id, user_id, paste_content)    
+        paste_id = self.dbPaste.createNewPaste(parent_id, category_id, user_id, paste_content, title)    
         
         return paste_id
         
@@ -49,8 +49,20 @@ class Paste:
             @access public
         """
         
-        pastes = self.dbPaste.getAllChildPastes(paste_id);
+        pastes = self.dbPaste.getAllChildPastes(paste_id)
         
+        return pastes
+    
+    def getAllPastesByCategory(self, category_id):
+        """
+            getAllPastesByCategory 
+            function to get all pastes in a category
+            @param category_id ID of the category
+            @access public
+        """
+        
+        pastes = self.dbPaste.getAllPastesByCategory(category_id)
+                
         return pastes
         
     def getPasteByID (self, paste_id):
@@ -65,20 +77,20 @@ class Paste:
         
         return paste
         
-    def editPaste(self, paste_id, group_id, parent_id, category_id, user_id, paste_content):
+    def editPaste(self, paste_id, parent_id, category_id, user_id, paste_content, title):
         """
             editPaste
             function to edit a paste
             @param paste_id Id of the paste
-            @param group_id Group Id for the new paste
             @param parent_id Id of this pastes parent
             @param category_id Category Id for this paste
             @param user_id Id of the editing user
             @param paste_content Content of the paste
+            @param title Title of the paste
             @access public
         """
             
-        self.dbPaste.editPaste(paste_id, group_id, parent_id, category_id, user_id, paste_content)    
+        self.dbPaste.editPaste(paste_id, parent_id, category_id, user_id, paste_content, title)    
     
         
         

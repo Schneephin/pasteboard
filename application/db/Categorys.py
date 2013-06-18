@@ -50,7 +50,6 @@ class Category(DB):
 
         result = cursor.execute('INSERT IGNORE INTO pb_categorys (name, parent_id)  VALUES (%s,%s)',(category,parentId))
         self.getConnection().commit()
-        self.disconnect()
         return result
 
     def getAllCategorys(self):
@@ -67,4 +66,30 @@ class Category(DB):
         self.getConnection().commit() 
         self.disconnect()
 
+        return categorys
+
+    def findCategoryByName(self,name):
+        self.getConnection()
+        cursor = self.connection.cursor(self.mdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM pb_categorys WHERE name = %s', (name))
+        category = cursor.fetchone()
+        self.getConnection().commit() 
+
+        return category
+
+    def findCategoryById(self,catid):
+        self.getConnection()
+        cursor = self.connection.cursor(self.mdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM pb_categorys WHERE id = %s', (catid))
+        category = cursor.fetchone()
+        cursor.close()
+
+        return category
+
+    def findAllCategorysByParent(self,parentId):
+        self.getConnection()
+        cursor = self.connection.cursor(self.mdb.cursors.DictCursor)
+        cursor.execute("SELECT id FROM pb_categorys WHERE parent_id = %s", (parentId)) 
+        categorys = cursor.fetchall()
+        cursor.close()
         return categorys

@@ -5,6 +5,7 @@ class Category:
 
     def __init__(self):
         self.dbCategory = dbCategory()
+        self.categorys = []
 
     def createCategory(self, categorystring):
         categorys = categorystring.split("/");
@@ -25,4 +26,30 @@ class Category:
         
         return result
 
+    def saveCategorys(self, categorystring):
 
+        categorys = categorystring.split("/");
+        parent = 0;
+        
+        for category in categorys:
+            cat = self.dbCategory.findCategoryByName(category)
+            if cat:
+                parent = cat['id']
+            else:
+                self.dbCategory.createCategory(category,parent)
+                cat = self.dbCategory.findCategoryByName(category)
+                parent = cat['id']
+
+                
+
+    def findAllCategorys(self,categoryid):
+        
+        cat = self.dbCategory.findCategoryById(categoryid)
+        if cat :
+            self.categorys.append(cat['id'])
+        if cat or categoryid == 0:  
+            cats =  self.dbCategory.findAllCategorysByParent(categoryid)
+            for category in cats:
+                self.findAllCategorys(category['id'])
+
+        return self.categorys
