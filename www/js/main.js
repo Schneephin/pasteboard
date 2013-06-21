@@ -77,6 +77,9 @@ function addToTemplate(result) {
             if (null != result["result"].data ) {
                template.addData(result["result"].data);
             }
+        } else {
+            deleteCookie("tk");
+            window.location.pathname = "";
         }
     }
 }

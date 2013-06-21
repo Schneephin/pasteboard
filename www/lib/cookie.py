@@ -48,8 +48,16 @@ class Cookie():
             return None 
 
     def delete(self,key):
+        """
+            delete cookie function 
+
+            @author Anja Siek <anja.marita@web.de> 
+            @param key key 
+            @access public
+        """
         if self.get(key):
             headers = {}
             cookie = http.cookies.SimpleCookie(os.environ.get("HTTP_COOKIE",""))
+            cookie[key] = ""
             cookie[key]['expires'] = time.strftime("%a, %d-%b-%Y %T GMT", time.gmtime(time.time()))
             return cookie
