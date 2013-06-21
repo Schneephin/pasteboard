@@ -7,7 +7,6 @@
         <script src="js/micro-template.js"></script>
         <script src="js/xml2array.js"></script>
         <script src="js/pageHandler.js"></script>
-        <script src="js/file.js"></script>
         <script src="js/rest.js"></script>
         <script src="js/template.js"></script>
         <script src="js/main.js"></script>
