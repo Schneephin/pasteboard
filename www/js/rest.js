@@ -1,5 +1,6 @@
 /**
- * Rest - handler Konstuctor with ajax -request
+ * Rest - handler Constuctor with ajax -request
+ *
  * @author Anja Siek <anja.marita@web.de>
  * @param string method (GET, POST)
  * @param string url
@@ -12,6 +13,13 @@ var Rest = function(method, url, type, params) {
     this.type = type;
     this.params = params;
 };
+
+
+Rest.prototype.loadfile = function (filename,type) {
+    this.type = type;
+    this.url = filename;
+    return this.handleRequset();
+}
 /**
  * function to make a REST-handle via ajax and return response
  * @author Anja Siek <anja.marita@web.de>

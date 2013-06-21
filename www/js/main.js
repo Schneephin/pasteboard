@@ -1,4 +1,9 @@
 /**
+ * file for javascript functions and objects witch are used 
+ * by more than one page its like js -library
+ */
+
+/**
  * class ErrorHandler 
  * @author Anja Siek <anja.marita@web.de>
  */
@@ -83,6 +88,17 @@ function addToTemplate(result) {
         }
     }
 }
+
+/**
+ * function deleteCookie
+ * function to remove a cookie
+ * @autor Anja Siek <anja.marita@web.de> 
+ * @param  name
+ */
+function deleteCookie(name)
+{
+    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
 /**
  * upstream code comes from: http://www.quirksmode.org/js/cookies.html
  */
@@ -96,10 +112,8 @@ function readCookie(name) {
     }
     return null;
 }
-function deleteCookie(name)
-{
-    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-}
+
+
 /**
  * upstream code comes from:
  */

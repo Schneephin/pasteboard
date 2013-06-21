@@ -4,7 +4,7 @@
  * @author Anja Siek <anja.marita@web.de>
  */
 var Template = function() {
-    this.file = new File;
+    this.file = new Rest("GET", "","xml","");
     this.templatesDir = "templates";
     this.templates =  new Array();
     this.html  = "";
@@ -32,11 +32,11 @@ Template.prototype.getTranslations = function(page, lang) {
         var respronse = this.file.loadfile(files[i], "xml");
         switch (respronse['status']) {
             case  0 :
-                var trans = respronse['data'];
+                var trans = respronse['result'];
                 this.addData(xml2array(trans),"trans");
                 break;
             case 1 :
-                errorHandler.handel(respronse['data']);
+                errorHandler.handel(respronse['result']);
                 break;
         }
     }
@@ -58,7 +58,7 @@ Template.prototype.load = function(name) {
 
     switch (respronse['status']) {
         case  0 :
-            var html = respronse['data'];
+            var html = respronse['result'];
             var template = new Object();
             template["file"] = file;
             template["html"] = html;
@@ -66,7 +66,7 @@ Template.prototype.load = function(name) {
             return true;
             break;
         case 1 :
-            errorHandler.handel(respronse['data']);
+            errorHandler.handel(respronse['result']);
             return false;
             break;
     }

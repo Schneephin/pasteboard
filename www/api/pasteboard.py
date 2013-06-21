@@ -17,14 +17,20 @@ from application.pb import PasteboardError
 class Pasteboard:
 
     """
-    Pasteboard: 
-    Api class for pasteboard-application
-    
-    @package pasteboard 
-    @version $id$
-    @author Anja Siek <ja.sie.kan@gmail.com> 
+        Pasteboard: 
+        Api class for pasteboard-application
+        
+        @package pasteboard 
+        @version $id$
+        @author Anja Siek <anja.marita@web.de> 
     """
     def __init__(self,data):
+        """
+            __init__ 
+            create class-vars data and pb 
+            @param data data 
+            @access private
+        """
         self.data = data
         self.pb = Pb()
 
@@ -58,6 +64,13 @@ class Pasteboard:
 
 
     def getUser(self):
+        """
+            getUser 
+            get user from application
+            
+            @author Anja Siek <anja.marita@web.de> 
+            @access public
+        """
         token = cgi.escape(json.loads(self.data)['tk'])
         result = {'state': 'error'}
 
@@ -77,6 +90,7 @@ class Pasteboard:
         """
             getPastesListByUser 
             get a list of all paste created by a user
+            @author Anja Siek <anja.marita@web.de> 
             @author Christian Wenzlick <christian.wenzlick@siemens.com>
             @access public
         """
@@ -184,6 +198,13 @@ class Pasteboard:
         self.return_response(result)
 
     def allCategorys(self):
+        """
+            allCategorys 
+            get all categorys 
+
+            @author Anja Siek <anja.marita@web.de> 
+            @access public
+        """
         token = cgi.escape(json.loads(self.data)['tk'])
         result = {'state': 'error'}
 
