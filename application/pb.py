@@ -37,7 +37,7 @@ class Pb:
     def __init__(self):
         """
             __init__ 
-            constructor
+            constructor 
             @access private
         """
         pass
@@ -46,6 +46,8 @@ class Pb:
         """
             login 
             get the correct handler and call the login-function
+
+            @author Anja Siek <anja.marita@web.de> 
             @param email email 
             @param password password 
             @access public
@@ -57,6 +59,8 @@ class Pb:
         """
             getInviteKey 
             get the correct handler and call the Invite-key generation function
+
+            @author Anja Siek <anja.marita@web.de> 
             @access public
         """
         user = User.User()
@@ -66,6 +70,8 @@ class Pb:
         """
             register 
             get the correct handler and call the register function
+            
+            @author Anja Siek <anja.marita@web.de> 
             @param uname uname 
             @param email email 
             @param passw passw 
@@ -76,6 +82,14 @@ class Pb:
         return user.register(uname, email, passw, ikey)
 
     def getUser(self,token):
+        """
+            getUser 
+            get the correct handler and call the function to get User by token
+            
+            @author Anja Siek <anja.marita@web.de> 
+            @param token token 
+            @access public
+        """
         try:
             user = User.User()
             return user.getUser(token)
@@ -83,6 +97,13 @@ class Pb:
             raise PasteboardError(e.__str__()) 
 
     def getAllCategorys(self):
+        """
+            getAllCategorys 
+            get the correct handler and call the function to return all categorys
+            
+            @author Anja Siek <anja.marita@web.de> 
+            @access public
+        """
         cat = Categorys.Category()
         return cat.getAllCategorys()
     
@@ -169,6 +190,14 @@ class Pb:
         except DbPasteError as e:
             raise PasteboardError(e.__str__()) 
     def saveCategorys(self, categorystring):
+        """
+            saveCategorys 
+            get the correct handler and call function to save categorystring
+            
+            @author Anja Siek <anja.marita@web.de> 
+            @param categorystring categorystring 
+            @access public
+        """
         try:
             cat = Categorys.Category()
             return cat.saveCategorys(categorystring)
@@ -176,6 +205,14 @@ class Pb:
             raise PasteboardError(e.__str__())
     
     def findAllCategorys(self,categoryid):
+        """
+            findAllCategorys 
+            get the correct handler and call function to find all subcategorys by id
+            
+            @author Anja Siek <anja.marita@web.de> 
+            @param categoryid categoryid 
+            @access public
+        """
         try:
             cat = Categorys.Category()
             return cat.findAllCategorys(categoryid)
