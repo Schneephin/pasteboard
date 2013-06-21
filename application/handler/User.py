@@ -5,13 +5,22 @@ from application.db.Token import Token as dbToken
 class User:
     """
         User: 
-        User-handler class  
-        @package application
+        User-handler class handles all requests for user
+        this class know witch db - handler class to use to
+        get or set data to db
+
+        @package application/handler
         @version $id$
         @author Anja Siek <anja.marita@web.de> 
     """
     def __init__(self):
-        # create class-var DB-User
+        """
+            __init__ 
+            creates class-vars dbUser and dbToken
+
+            @author Anja Siek <anja.marita@web.de> 
+            @access private
+        """
         self.dbUser = dbUser()
         self.dbToken = dbToken()
 
@@ -20,6 +29,8 @@ class User:
         """
             getInviteKey 
             create user with key on success return key 
+
+            @author Anja Siek <anja.marita@web.de> 
             @access public
         """
         key = self.dbToken.generate_hash()
@@ -31,6 +42,8 @@ class User:
         """
             createUser 
             call db-userobject to create an User with invitekey
+
+            @author Anja Siek <anja.marita@web.de> 
             @param key key 
             @access public
         """
@@ -40,6 +53,8 @@ class User:
         """
             register 
             call db-userobject to register a new user
+
+            @author Anja Siek <anja.marita@web.de> 
             @param uname uname 
             @param email email 
             @param passw passw 
@@ -55,6 +70,8 @@ class User:
         """
             login 
             call db-user object to login an User
+
+            @author Anja Siek <anja.marita@web.de> 
             @param email email 
             @param passwd passwd 
             @access public
@@ -65,7 +82,14 @@ class User:
         return token
 
     def getUser(self, token):
+        """
+            getUser 
+            return an userobject by token
+
+            @author Anja Siek <anja.marita@web.de> 
+            @param token token 
+            @access public
+        """
         uid = self.dbToken.getUserIdbyToken(token)
         user = self.dbUser.getUserData(uid)
         return user
-
