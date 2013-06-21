@@ -33,6 +33,7 @@ class DB():
         """
             connect 
             try to connet to db  
+            @author Anja Siek <anja.marita@web.de>
             @access public
         """
         try:
@@ -50,6 +51,7 @@ class DB():
         """
             getConnection 
             return a db-connection object
+            @author Anja Siek <anja.marita@web.de>
             @access public
         """
         if not self.connection:
@@ -61,6 +63,7 @@ class DB():
         """
             disconnect 
             close connection if exists
+            @author Anja Siek <anja.marita@web.de>
             @access public
         """
         

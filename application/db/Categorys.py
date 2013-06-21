@@ -25,12 +25,13 @@ class Category(DB):
 
     """
         Category(DB): 
+        class to handle pb_categorys table on db 
+        extends connect.DB class so that all functions from 
+        connect.DB are availeble
         
-        @package 
         @version $id$
-        @copyright 
-        @author Anja Siek <ja.sie.kan@gmail.com> 
-        @license 
+        @package application/db
+        @author Anja Siek <anja.marita@web.de>
     """
     def __init__(self):
         # call parant init-method
@@ -39,7 +40,9 @@ class Category(DB):
     def createCategory(self, category, parentId):
         """
             createCategory 
+            insert category into db
             
+            @author Anja Siek <anja.marita@web.de>
             @param category category 
             @param parentId parentId 
             @access public
@@ -55,7 +58,9 @@ class Category(DB):
     def getAllCategorys(self):
         """
             getAllCategorys 
+            return all categorys
             
+            @author Anja Siek <anja.marita@web.de>
             @access public
         """
         self.getConnection()
@@ -69,6 +74,14 @@ class Category(DB):
         return categorys
 
     def findCategoryByName(self,name):
+        """
+            findCategoryByName 
+            find category by name
+            
+            @author Anja Siek <anja.marita@web.de>
+            @param name name 
+            @access public
+        """
         self.getConnection()
         cursor = self.connection.cursor(self.mdb.cursors.DictCursor)
         cursor.execute('SELECT * FROM pb_categorys WHERE name = %s', (name))
@@ -78,6 +91,14 @@ class Category(DB):
         return category
 
     def findCategoryById(self,catid):
+        """
+            findCategoryById 
+            find category by id
+            
+            @author Anja Siek <anja.marita@web.de>
+            @param catid catid 
+            @access public
+        """
         self.getConnection()
         cursor = self.connection.cursor(self.mdb.cursors.DictCursor)
         cursor.execute('SELECT * FROM pb_categorys WHERE id = %s', (catid))
@@ -87,6 +108,14 @@ class Category(DB):
         return category
 
     def findAllCategorysByParent(self,parentId):
+        """
+            findAllCategorysByParent 
+            get all subcategorys by its parentid
+            
+            @author Anja Siek <anja.marita@web.de>
+            @param parentId parentId 
+            @access public
+        """
         self.getConnection()
         cursor = self.connection.cursor(self.mdb.cursors.DictCursor)
         cursor.execute("SELECT id FROM pb_categorys WHERE parent_id = %s", (parentId)) 

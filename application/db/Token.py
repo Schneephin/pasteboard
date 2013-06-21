@@ -24,19 +24,39 @@ class DbTokenError(Exception):
 
 class Token(DB):
 
+    """
+        Token(DB): 
+        class to handle pb_token table on db
+        
+        @package application/db 
+        @version $id$
+        @author Anja Siek <ja.sie.kan@gmail.com> 
+    """
     def __init__(self):
-        # call parant init-method
+        """
+            __init__ 
+            call parent init-method  
+            @access private
+        """
         super().__init__()
 
     def generate_hash(self):
         """
             generate_hash 
-            function to generate hash-key 
+            function to generate hash-key for token
             @access public
         """
         return hashlib.md5(str(time.time()).encode('utf-8')).hexdigest()
 
     def createToken(self, userId):
+        """
+            createToken 
+            greate new token for userid
+            
+            @author Anja Siek <anja.marita@web.de>
+            @param userId userId 
+            @access public
+        """
 
         token = self.generate_hash()
         self.getConnection()
@@ -48,6 +68,15 @@ class Token(DB):
         return token
     
     def getUserIdbyToken(self, token):
+        """
+            getUserIdbyToken 
+            return userid for token  
+            
+            @author Anja Siek <anja.marita@web.de>
+            @raise DbTokenError // if token is not valid
+            @param token token 
+            @access public
+        """
         self.getConnection()
         cursor = self.connection.cursor()
         cursor.execute('SELECT user_id FROM pb_token WHERE token = %s ',(token))

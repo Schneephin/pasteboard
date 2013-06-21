@@ -25,20 +25,26 @@ class DbUserError(Exception):
 class User(DB):
     """
         User(DB): 
+        class to handle pb_users and pb_userdata table on db
         extends connect.DB class so that all functions from 
         connect.DB are availeble
-        @package application
+        @package application/db
         @author Anja Siek <anja.marita@web.de>
         @version $id$
     """
     def __init__(self):
-        # call parant init-method
+        """
+            __init__ 
+            call parant init-method 
+            @access private
+        """
         super().__init__()
 
     def createUser(self,key):
         """
             createUser 
             function to create a new user with its invitekey
+            @author Anja Siek <anja.marita@web.de>
             @param key key 
             @access public
         """
@@ -53,6 +59,7 @@ class User(DB):
         """
             register 
             function for registration with correct invitekey 
+            @author Anja Siek <anja.marita@web.de>
             @param uname uname 
             @param email email 
             @param passw passw 
@@ -84,6 +91,7 @@ class User(DB):
         """
             getMd5 
             generates an md5 for password
+            @author Anja Siek <anja.marita@web.de>
             @param passw passw 
             @access public
         """
@@ -94,6 +102,7 @@ class User(DB):
         """
             login 
             login function check password and email
+            @author Anja Siek <anja.marita@web.de>
             @param email email 
             @param passw passw 
             @access public
@@ -112,6 +121,13 @@ class User(DB):
         return user[0] 
 
     def getUserData(self, uid):
+        """
+            getUserData 
+            return all data from user for userid 
+            @author Anja Siek <anja.marita@web.de>
+            @param uid uid 
+            @access public
+        """
         self.getConnection()
         cursor = self.connection.cursor(self.mdb.cursors.DictCursor) 
         cursor.execute(
