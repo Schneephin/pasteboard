@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+"""
+    pastes page 
+    first entry point of pastes page
+    @author Anja Siek <anja.marita@web.de>
+"""
 
 import cgi, sys
 from lib import *

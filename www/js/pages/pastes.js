@@ -26,6 +26,11 @@ if (typeof token != "undefined") {
     var result = rest.handleRequset();
     addToTemplate(result);
 
+    //add sidebar
+    var content = document.getElementById("contentouter");
+    content.classList.add("side");
+    content.classList.remove("noside");
+
 }
 
 function filterPastes(categoryid)

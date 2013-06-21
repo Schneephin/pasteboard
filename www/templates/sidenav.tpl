@@ -4,6 +4,7 @@
     actual only used on pastes -page
     and filled placeholders by micro-template.js 
 -->
+
 <h2 style=""  onclick="filterPastes('<%= 0 %>');" ><%=trans.sidebar%></h2>
 <% function printCats(cats, categorys, iter) { %>
     <ul>
@@ -18,5 +19,7 @@
     </ul>
 <% } %>
 <div id="sidenav">
-<% printCats(categorys[0], categorys, 10); %>
+<% if ( categorys ) { %>
+    <% printCats(categorys[0], categorys, 10); %>
+<% } %>
 </div>

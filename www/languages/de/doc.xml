@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trans>
+    <title>Documentation</title>
+    <h1>Thema ():</h1>
+    <h2>Zielsetzung ():</h2>
+    <h3>Zielgruppe ():</h3>
+    <h4>Funktionalitäten():</h4>
+    <h5>Registrierung ():</h5>
+    <h6>Login ():</h6>
+    <h7>Übersicht ():</h7>
+    <h8>New ():</h8>
+    <h9>Antwort ():</h9>
+    <h10> Gruppen ():</h10>
+    <c1><![CDATA[Pasteboard ist eine neuartige Hybridanwendung, welche die 
+        Textveröffentlichungsfunktionalität von Pastebin mit der Kommentarfunktion wie 
+        man sie aus Foren oder Blogs kennt verknüpft. 
+        <br>
+        <br>
+        Pastebins sind Webapplikationen, die es erlauben Texte einfach und in der Regel 
+        anonym ins Web zu stellen. Viele Pastebins bieten zudem die Möglichkeit des 
+        Syntax-Highlightings für diverse Programmiersprachen an und werden vermutlich 
+        auch darum häufig in Foren oder Chats eingesetzt um etwa Programmierhilfe oder 
+        ähnliches in Anspruch zu nehmen. Nachteil ist hierbei natürlich, dass man im 
+        Grunde zwei Systeme parallel in Benutzung hat, das Pastebin, sowie die 
+        eigentlich Chat oder Forenplattform.
+        <br>
+        <br>
+        Vor diesem Hintergrund entstand die Motivation ein System zu schaffen, welches 
+        diese beiden Funktionalitäten - und noch viel mehr – in einer Anwendung vereint.  
+        Ziel ist es also eine Software zu schaffen, die es ermöglicht Code oder generell 
+        Texte einfach und mit ähnlichem Funktionsumfang wie in heutigen Pastebins zu 
+        veröffentlichen aber es zusätzlich erlaubt anderen Anwendern den 
+        veröffentlichten Text zu kommentieren oder erweitern.
+        <br>
+        <br>
+        Pasteboard kann ähnlich einfach über eine Weboberfläche gesteuert werden, wie 
+        Pastebins oder Foren, bietet aber darüber hinaus auch die Möglichkeit durch eine 
+        frei verfügbare API eigene Clients zu entwickeln, die jeweils auf die 
+        individuellen Bedürfnisse des Anwenders zugeschnitten sind.
+        <br>
+        <br>
+        Um Pasteboard möglicherweise auch für Firmen und Organisationen interessant zu 
+        machen wird zudem über eine integrierte Rechteverwaltung die Möglichkeit 
+        geschaffen veröffentlichte Text nur für bestimmte Benutzergruppen, wie zum 
+        Beispiel Firmenmitarbeiter oder externe Dienstleister freizugeben.
+        ]]></c1>
+    <c2><![CDATA[
+        Es soll ein Pasteboard erstellt werden über das Programmierer Code posten und 
+        diskutieren können. 
+        <br>
+        <br>
+        Registrierte Benutzer können Code posten und andere bereits registrierte 
+        Benutzer können diesen lesen und Verbesserungsvorschläge dazu abgeben. Es können 
+        x Verbesserungsvorschläge pro registriertem Benutzer abgegeben werden.
+        <br>
+        <br>
+        Außerdem können Gruppen erstellt werden. Somit können Posts nur für bestimmte 
+        Gruppen sichtbar gemacht werden und nicht Besuchen bekommen die Einträge nicht 
+        zu sehen,
+        <br>
+        <br>
+        Nicht registrierte Besucher können lediglich auf die eingestellten Beiträge und 
+        Kommentare lesend zugreifen. 
+        <br>
+        <br>
+        Für eine Registrierung können neue Besucher eine Einladung anfordern. Die einer 
+        erhaltenen Einladung können Besucher sich dann auch registrieren. 
+        ]]></c2>
+    <c3><![CDATA[
+        Entwickler und Programmierer und alle Menschen die Hilfe bei der Programmierung 
+        von Programmen benötigen oder ihren Code mit anderen Teilen wollen. 
+        ]]></c3>
+    <c4><![CDATA[
+        Das Pasteboard ist nur für registrierte Benutzer zugänglich. Einen Key zur 
+        Registrierung erhält man via Einladung. Mit diesem Key kann man sich auf der 
+        Registrierungs-Seite mit einzigartiger Email-Adresse registrieren. Dieses meint, 
+        das man sich mit einer Email-Adresse jeweils nur einmal registrieren kann. Ein 
+        weiteres Pflichtfeld ist das Passwort und der bereits erwähnte Registrierungs–
+        Key (UUID). Der Benutzername ist optional.
+        ]]></c4>
+    <c5><![CDATA[
+        Für den Login benötigt man Email-Adresse und Passwort der Registrierung. 
+        ]]></c5>
+    <c6><![CDATA[
+        Nach dem Login kommt man direkt auf die Übersichtsseite. Hier werden alle für 
+        den Benutzer zugänglichen Pastes in einer Liste dargestellt. Des Weiteren gibt es noch eine Subnavigation, mit dessen Hilfe man in weitere Unterkategorien 
+        springen kann. Hier werden ebenfalls nur die  Unterkategorien angezeigt, in 
+        denen sich Pastes befinden, auf die der Benutzer Zugriff hat.
+        ]]></c6>
+    <c7><![CDATA[
+        Im angemeldeten Zustand erscheint auf allen Paste Seiten ein „New- Button“, 
+        über welchen man einen neuen Paste anlegen kann.
+        <br>
+        <br>
+        Das erste Pflichtfeld ist der Name des Pastes. Im zweiten Textfeld kann man den 
+        Pfad angeben unter dem der Paste gespeichert werden soll, als Voreinstellung 
+        wird der aktuelle Pfad angegeben. Wenn ein noch nicht vorhandener Pfad 
+        eingegeben wird, wird dieser neu erstellt und entsprechend zur Subnavigation 
+        hinzugefügt. 
+        <br>
+        <br>
+        Im dritten Bereich werden die Zugriffsrechte eingestellt. Entweder kann man 
+        einen Haken bei „public“ setzen (voreingestellt), oder eine spezielle 
+        Zugriffsgruppe auswählen.
+        <br>
+        <br>
+        Im darunter liegenden Textfeld kann man dann den Code eingeben. Das Textfeld unterstützt via JavaScript Highlighting für die 
+        meisten Programmiersprachen. Es werden zusätzlich der Autor und das Datum 
+        gespeichert.
+        ]]></c7>
+    <c8><![CDATA[
+        Wenn man Zugriffsrechte auf einen Paste hat kann man darauf antworten und damit 
+        einen Paste kommentieren oder Verbesserungsvorschläge einreichen. Bei der 
+        Antwort hat man dann ebenfalls ein JavaScript gestütztes Textfeld indem man 
+        ebenfalls Code oder Text eingeben kann. Hier jedoch hat man keine weiteren 
+        Konfigurationsmöglichkeiten.
+        ]]></c8>
+    <c9><![CDATA[
+        Im Bereich Gruppen kann man seine Rechtegruppen verwalten.
+        <br>
+        <br>
+        Um eine neue Gruppe anzulegen muss man einen Gruppennamen angeben. Optional kann 
+        man noch eine Elterngruppe nehmen, um die Benutzer einer anderen Gruppe zu übernehmen und weitere Benutzer über eine Multi-Selectbox hinzufügen. Bereits 
+        bestehende Gruppen können mit denselben Konfigurationsmöglichkeiten verändert 
+        werden.
+        ]]></c9>
+</trans>

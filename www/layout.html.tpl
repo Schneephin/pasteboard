@@ -18,7 +18,7 @@
     <body>
         <div id="container">
             <header id="header"></header>
-            <div id="contentouter"><section id="content"></section></div>
+            <div id="contentouter" class="noside"><section id="content"></section></div>
             <aside id="sidebar"></aside>
             <footer id="footer"></footer>
         </div>

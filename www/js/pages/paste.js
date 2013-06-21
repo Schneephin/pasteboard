@@ -15,5 +15,10 @@ if (typeof token != "undefined") {
     var rest = new Rest("POST", "api/pasteboard.py/getUser", "json", params);
     var result = rest.handleRequset();
     addToTemplate(result);
+    
+    //add sidebar
+    var content = document.getElementById("contentouter");
+    content.classList.add("side");
+    content.classList.remove("noside");
 
 }
