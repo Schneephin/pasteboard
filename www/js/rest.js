@@ -14,7 +14,14 @@ var Rest = function(method, url, type, params) {
     this.params = params;
 };
 
-
+/**
+ * function loadfile
+ * function to load file
+ *
+ * @author Anja Siek <anja.marita@web.de> 
+ * @param filename
+ * @param type
+ */
 Rest.prototype.loadfile = function (filename,type) {
     this.type = type;
     this.url = filename;

@@ -1,31 +1,21 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
+"""
+    paste page 
+    first entry point of paste page
+    @author Anja Siek <anja.marita@web.de>
+"""
+
 import cgi, sys
 from lib import *
 import json
 
-def forbidden():
-    #redirect to ostart-page if toke is not set
-    header ={}
-    header['Status'] = '403 Forbidden'
-    header['Refresh'] = '0; url=/'
-    basics.print_headers(header)
-    sys.stdout.write("Redirecting ...")
-
-form = cgi.FieldStorage() 
-token = form.getvalue('tk')
+# get cookie to check token
 cookie = cookie.Cookie()
 c = cookie.get("tk")
 
-if  not token and not c:
-    forbidden()
+if not c or c == "None":
+    basics.forbidden()
 else:
-    if not c:
-        #set toke to cookie
-        sys.stdout.write(cookie.set("tk",token))
-        
-    header ={}
-    header['Content-type'] = 'text/html'
-    basics.print_headers(header)
     #get layout
     template = "layout.html.tpl"
     tpl = "".join(open(template,'r').readlines())
@@ -33,6 +23,8 @@ else:
     #define templates to load
     pages = {'header': 'headerloggedin','footer':'footer','content':'paste','sidebar':'sidenav'}
 
-    #print page
+    # print header
+    basics.print_headers({'Content-type':'text/html'})
+    # print page including pages variable
     sys.stdout.write(tpl.format(str(json.dumps(pages))))
 

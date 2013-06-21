@@ -73,6 +73,13 @@ Template.prototype.load = function(name) {
     return false;
 };
 
+/**
+ * addData function
+ * add Data to variables array
+ * @author Anja Siek <anja.marita@web.de> 
+ * @param data
+ * @param key
+ */
 Template.prototype.addData = function(data, key) {
     if ('undefined' != typeof key) {
         if (typeof this.data[key] == 'undefined') {

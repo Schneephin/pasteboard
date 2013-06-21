@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<!-- 
+    main layout for all pages 
+-->
 <html lang="de">
     <head>
         <meta charset="utf-8" /> 
@@ -21,10 +24,14 @@
         </div>
         <script type="text/javascript">
             var template,errorHandler ;
+            // on document ready: 
             document.addEventListener('DOMContentLoaded', function () {{
+                // initalize template and errorhandler objects
                 errorHandler = new ErrorHandler();
                 template = new Template();  
+                // handle pages it will be filled via python template handling
                 pageHandle( {} );
+                // check active page
                 setActive();
                 
             }}, false);
