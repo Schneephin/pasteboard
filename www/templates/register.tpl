@@ -1,3 +1,8 @@
+<!-- 
+    template for register page
+    this will be included in the content div
+    and filled placeholders by micro-template.js 
+-->
 <h2><%=trans.registertitle%></h2>
 <div id="contentinner">
     <div id ="info"><%=trans.text%></div>

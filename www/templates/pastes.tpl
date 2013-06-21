@@ -1,3 +1,8 @@
+<!-- 
+    template for pastes page
+    this will be included in the content - div 
+    and filled placeholders by micro-template.js 
+-->
 <h2><%=trans.tabletitle%></h2>
 <div id="contentinner">
 <table class="pastes">

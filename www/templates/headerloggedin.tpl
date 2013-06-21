@@ -1,3 +1,8 @@
+<!-- 
+    template for logged in header
+    this will be included in the header - part
+    and filled placeholders by micro-template.js 
+-->
 <div id="logo"><a href="/" ><%=trans.header.title%></a></div>
 <nav>
     <ul>

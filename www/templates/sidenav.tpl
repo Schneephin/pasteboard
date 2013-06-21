@@ -1,3 +1,9 @@
+<!-- 
+    template for sidenavigation
+    this will be included in the aside -part 
+    actual only used on pastes -page
+    and filled placeholders by micro-template.js 
+-->
 <h2 style=""  onclick="filterPastes('<%= 0 %>');" ><%=trans.sidebar%></h2>
 <% function printCats(cats, categorys, iter) { %>
     <ul>
