@@ -3,22 +3,13 @@ import cgi, sys
 from lib import *
 import json
 
-def forbidden():
-    #redirect to start-page if toke is not set
-    header ={}
-    header['Location'] = '+HOME+'
-    header['Status'] = '403 Forbidden'
-    header['Content-type'] = 'text/html; charset=utf-8'
-    print(cookie.set("tk",'=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'))
-    basics.print_headers(header)
-
 form = cgi.FieldStorage() 
 token = form.getvalue('tk')
 cookie = cookie.Cookie()
 c = cookie.get("tk")
 
 if not token and not c or c == "None" or token == "None":
-    forbidden()
+    basics.forbidden()
 else:
     if not c or (token and  not c == token) :
         #set toke to cookie

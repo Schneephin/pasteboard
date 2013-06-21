@@ -66,7 +66,6 @@ class Pasteboard:
             result = {'state': 'ok'}
             result['data'] = user 
         except PasteboardError as e:
-            self.print_headers({"Status": "403 Forbidden"})
             result['msg'] = e.__str__()
             pass
         except Exception as e:
@@ -91,7 +90,6 @@ class Pasteboard:
             result = {'state': 'ok'}
             result['data'] = {
                 'pastes': self.pb.getAllPastesByCategory(catid)
-            pastes = self.pb.getAllPastesByUser(user[0])
             
             }
             self.return_response(result)
@@ -268,10 +266,8 @@ def main():
             pasteboard.login()
         elif function == 'getUser':
             pasteboard.getUser()
-        elif function == 'getPastesListByUser':
-            pasteboard.getPastesListByUser()
-        elif function == "getPastesListByCategory":
-            pasteboard.getPastesListByCategory()
+        elif function == 'getPastesList':
+            pasteboard.getPastesList()
         elif function == 'getInviteKey':
             pasteboard.getInviteKey()
         elif function == 'createPaste':

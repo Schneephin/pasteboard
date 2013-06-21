@@ -1,20 +1,21 @@
 #!/usr/bin/env python
+"""
+    cookie lib for use in webpage (www)
+    @author Anja Siek <anja.marita@web.de>
+"""
 
 import sys, os
 import http.cookies 
-
-from lib.basics import print_headers
+import time
 
 class Cookie():
 
     """
-    Cookie(): Class for handle cookies
-    
-    @package lib 
-    @version $id$
-    @copyright 
-    @author Anja Siek <anja.marita@web.de> 
-    @license 
+        Cookie(): Class for handle cookies
+        
+        @package lib 
+        @version $id$
+        @author Anja Siek <anja.marita@web.de> 
     """
     def set(self,key,value):
         """
@@ -45,3 +46,10 @@ class Cookie():
             return value
         except (http.cookies.CookieError, KeyError):
             return None 
+
+    def delete(self,key):
+        if self.get(key):
+            headers = {}
+            cookie = http.cookies.SimpleCookie(os.environ.get("HTTP_COOKIE",""))
+            cookie[key]['expires'] = time.strftime("%a, %d-%b-%Y %T GMT", time.gmtime(time.time()))
+            return cookie
