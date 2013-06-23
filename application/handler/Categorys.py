@@ -80,6 +80,7 @@ class Category:
                 self.dbCategory.createCategory(category,parent)
                 cat = self.dbCategory.findCategoryByName(category)
                 parent = cat['id']
+        return cat['id']
 
     def findAllCategorys(self,categoryid):
         """
