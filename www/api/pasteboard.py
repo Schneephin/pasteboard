@@ -118,9 +118,9 @@ class Pasteboard:
             @author Christian Wenzlick <christian.wenzlick@siemens.com> 
             @access public
         """
-        parent_id = cgi.escape(json.loads(self.data)['parent'])     
-        category_id = cgi.escape(json.loads(self.data)['category']) 
-        user = self.pb.getUser(cgi.escape(json.loads(self.data)['tk']))
+        parent_id = cgi.escape(json.loads(self.data)['parent'])   
+        category_id = self.pb.saveCategorys(cgi.escape(json.loads(self.data)['category'])) 
+        user_id = cgi.escape(json.loads(self.data)['userid']) 
         paste_content = cgi.escape(json.loads(self.data)['content'])
         title = cgi.escape(json.loads(self.data)['title'])		
  
@@ -132,7 +132,7 @@ class Pasteboard:
         if not paste_content:
             result = {'state': 'error'} 
             result['msg'] = 'no paste content'       
-        elif not user or not user[0] > 0:
+        elif not user_id:
             result = {'state': 'error'}
             result['msg'] = 'invalid user'
         elif not title:
@@ -140,7 +140,7 @@ class Pasteboard:
             result['msg'] = 'no title'
         else:
             try:
-                paste_id = self.pb.createNewPaste(parent_id, category_id, user[0], paste_content, title)
+                paste_id = self.pb.createNewPaste(parent_id, category_id, user_id, paste_content, title)
                 result = {'state': 'ok'}
                 result['data'] = {'paste_id': paste_id }
             except Exception as e:
@@ -272,6 +272,7 @@ def main():
         @author Anja Siek <anja.marita@web.de> 
         @access public
     """
+
     # get request-values
     form = cgi.FieldStorage()
     data = form.getvalue('data')
@@ -280,7 +281,6 @@ def main():
     # set request-values into api
     pasteboard = Pasteboard(data)
 
-    
     # check if called api-function exists if yes call it
     # if not return with 404 not found
     try:

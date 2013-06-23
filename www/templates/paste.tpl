@@ -10,6 +10,7 @@
     <p><%=trans.pasteTitle%>:</p><p><input type="text" name="title" placeholder="<%=trans.pasteTitle%>"></p>
     <p><%=trans.pasteCategory%>:</p><p><input type="text" name="category" placeholder="<%=trans.pasteCategory%>"></p>
     <p><%=trans.pasteContent%>:</p><p><textarea name="content" rows="30" cols="60"></textarea></p>
+    <input type="hidden" name="userid" value=<%=id%> /><input type="hidden" name="parent" value="1" />
     <input type="submit" value="<%=trans.pasteSubmit%>">
 </form> 
 </div>

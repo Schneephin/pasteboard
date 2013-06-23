@@ -50,11 +50,11 @@ class Paste(DB):
         self.getConnection()
         cursor  = self.connection.cursor()
                 
-        cursor.execute('INSERT INTO pb_pastes (parent_id, category_id, user_id)  VALUES (%i, %i, %i, %i)',(parent_id, category_id, user_id))
+        cursor.execute('INSERT INTO pb_pastes (parent_id, category_id, user_id)  VALUES (%s, %s, %s)',(parent_id, category_id, user_id))
         # the id is auto-incremented, so we need to get the actual value here
         paste_id = self.connection.insert_id()
         self.getConnection().commit()
-        cursor.execute('INSERT INTO pb_pastescontent (paste_id, content, datum, title)  VALUES (%i, %s, date(), %s)',(paste_id, paste_content, title))
+        cursor.execute('INSERT INTO pb_pastescontent (paste_id, content, title)  VALUES (%s, %s, %s)',(paste_id, paste_content, title))
         self.getConnection().commit()
         self.disconnect()
         

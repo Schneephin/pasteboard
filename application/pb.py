@@ -189,6 +189,7 @@ class Pb:
             return paste.createNewPaste(parent_id, category_id, user_id, paste_content, title)
         except DbPasteError as e:
             raise PasteboardError(e.__str__()) 
+
     def saveCategorys(self, categorystring):
         """
             saveCategorys 
