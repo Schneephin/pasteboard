@@ -15,7 +15,6 @@
     <p id="loggedintext">
         <%=trans.header.loggedintext%>
         <span><%=username%></span>
-        <button name="mydata"><%=trans.header.mydata%></button>
         <button name="logout" onclick="logout();"><%=trans.header.logout%></button>
     </p>
 </div>
