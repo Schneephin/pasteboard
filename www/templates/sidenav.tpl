@@ -5,7 +5,7 @@
     and filled placeholders by micro-template.js 
 -->
 
-<h2 style=""  onclick="filterPastes('<%= 0 %>');" ><%=trans.sidebar%></h2>
+<h2 style=" cursor:pointer;"  onclick="filterPastes('<%= 0 %>');" ><%=trans.sidebar%></h2>
 <% function printCats(cats, categorys, iter) { %>
     <ul>
         <% for ( var i in cats ) { %>
