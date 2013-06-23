@@ -3,10 +3,12 @@
 
 /**
  * get data from api and add it via addToTemplate function to template rendering
+ * @author Anja Siek
+ * @author Christian Wenzlick 
  */
 var token = readCookie('tk');
 
-//only if user is logged in we can load data
+// loading is only done if the user is successfully logged in
 if (typeof token != "undefined") {
     var data = new Object();
     data['tk'] = token; 

@@ -4,7 +4,8 @@ from application.db.Paste import Paste as dbPaste
 class Paste:
     """
         Paste: 
-        Paste-handler class  
+        Paste-handler class
+        this is a wrapper class for pastes and routes all paste-related function calls to the appropriate db function  
         @package application
         @version $id$
         @author Christian Wenzlick <christian.wenzlick@siemens.com> 
@@ -22,6 +23,7 @@ class Paste:
             @param user_id Id of the creating user
             @param paste_content Content of the paste
             @param title Title of the paste
+            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
             @access public
         """
         
@@ -34,6 +36,7 @@ class Paste:
             getAllPastesByUser 
             function to get all pastes created by a specific user
             @param user_id Id of the user
+            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
             @access public
         """
         
@@ -46,6 +49,7 @@ class Paste:
             getAllChildPastes 
             function to get all child pastes of a specific paste
             @param paste_id Id of the paste
+            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
             @access public
         """
         
@@ -58,6 +62,7 @@ class Paste:
             getAllPastesByCategory 
             function to get all pastes in a category
             @param category_id ID of the category
+            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
             @access public
         """
         
@@ -70,6 +75,7 @@ class Paste:
             getPasteByID 
             function to get a paste by id
             @param paste_id id of the paste
+            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
             @access public
         """
         
@@ -87,6 +93,7 @@ class Paste:
             @param user_id Id of the editing user
             @param paste_content Content of the paste
             @param title Title of the paste
+            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
             @access public
         """
             

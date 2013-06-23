@@ -16,6 +16,8 @@ class Paste(DB):
         Paste(DB): 
         extends connect.DB class so that all functions from 
         connect.DB are available
+        container class for pastes and uses the pb_pastes and pb_pastescontent tables
+        provides a number of functions for pastes like create, edit and get and takes care of the underlying sql
         @package application
         @author Christian Wenzlick <christian.wenzlick@siemens.com> 
         @version $id$
@@ -33,9 +35,11 @@ class Paste(DB):
             @param user_id Id of the creating user
             @param paste_content Content of the paste
             @param title The title of the paste
+            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
             @access public
         """
         
+        # user_id, paste_content and title are required fields, all the others are optional
         if not user_id:
             raise DbPasteError("No user ID submitted")
         if not paste_content:
@@ -47,6 +51,7 @@ class Paste(DB):
         cursor  = self.connection.cursor()
                 
         cursor.execute('INSERT INTO pb_pastes (parent_id, category_id, user_id)  VALUES (%i, %i, %i, %i)',(parent_id, category_id, user_id))
+        # the id is auto-incremented, so we need to get the actual value here
         paste_id = self.connection.insert_id()
         self.getConnection().commit()
         cursor.execute('INSERT INTO pb_pastescontent (paste_id, content, datum, title)  VALUES (%i, %s, date(), %s)',(paste_id, paste_content, title))
@@ -60,6 +65,7 @@ class Paste(DB):
             getAllPastesByUser 
             function to get all pastes created by a specific user
             @param user_id Id of the user
+            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
             @access public
         """
         
@@ -89,6 +95,7 @@ class Paste(DB):
             getAllChildPastes 
             function to get all child pastes of a specific paste
             @param paste_id Id of the paste
+            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
             @access public
         """
         if not paste_id:
@@ -117,6 +124,7 @@ class Paste(DB):
             getAllPastesByCategory 
             function to get all pastes in a category
             @param category_id ID of the category
+            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
             @access public
         """
         if not category_id:
@@ -143,6 +151,7 @@ class Paste(DB):
             getPasteByID 
             function to get a paste by id
             @param paste_id id of the paste
+            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
             @access public
         """
         if not paste_id:
@@ -180,6 +189,7 @@ class Paste(DB):
             @param user_id Id of the editing user
             @param paste_content Content of the paste
             @param title Title of the paste
+            @author Christian Wenzlick <christian.wenzlick@siemens.com> 
             @access public
         """
         
@@ -194,12 +204,11 @@ class Paste(DB):
                                 parent_id=%i,
                                 category_id=%i
                             WHERE id=%i''',(user_id, parent_id, category_id, paste_id))
-        paste_id = self.connection.insert_id()
         self.getConnection().commit()
         cursor.execute('''UPDATE pb_pastescontent
                             SET datum=date(),
                                 content=%s,
                                 title=%s
-                            WHERE paste_id=%i''',(paste_content, paste_id, title))
+                            WHERE paste_id=%i''',(paste_content, title, paste_id))
         self.getConnection().commit()
         self.disconnect()

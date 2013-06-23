@@ -3,6 +3,7 @@
     pasteboard.py
     api for pasteboard-application
     @author Anja Siek <anja.marita@web.de>
+    @author Christian Wenzlick <christian.wenzlick@siemens.com>
 """
 
 # some imports
@@ -89,7 +90,7 @@ class Pasteboard:
     def getPastesList(self):
         """
             getPastesListByUser 
-            get a list of all paste created by a user
+            get a list of all paste in a category
             @author Anja Siek <anja.marita@web.de> 
             @author Christian Wenzlick <christian.wenzlick@siemens.com>
             @access public
@@ -113,7 +114,7 @@ class Pasteboard:
     def createPaste(self):
         """
             createPaste 
-            create a new Paste
+            create a new paste
             @author Christian Wenzlick <christian.wenzlick@siemens.com> 
             @access public
         """
@@ -200,7 +201,7 @@ class Pasteboard:
     def allCategorys(self):
         """
             allCategorys 
-            get all categorys 
+            get all categories 
 
             @author Anja Siek <anja.marita@web.de> 
             @access public
@@ -266,7 +267,7 @@ class Pasteboard:
 def main():
     """
         main 
-        main method handel api-functions
+        main method handles api-functions
        
         @author Anja Siek <anja.marita@web.de> 
         @access public
