@@ -156,26 +156,24 @@ class Paste(DB):
         """
         if not paste_id:
             raise DbPasteError("No paste ID submitted")
-        
+
         self.getConnection()
         cursor = self.connection.cursor(self.mdb.cursors.DictCursor) 
-        cursor.execute('''SELECT 
-                    pb_pastes.id as paste_id,
-                    pb_pastes.parent_id as parent_id,
-                    pb_pastes.category_id as category_id,
-                    pb_pastes.user_id as user_id,
-                    pb_pastescontent.content as paste_content,
-                    pb_pastescontetn.datum as datum,
-                    pb_pastescontent.title as title
-                FROM pb_pastes JOIN pb_pastescontent ON pb_pastes.id = pb_pastescontent.paste_id 
-                WHERE pb_pastes.id = %i''',paste_id)
+        cursor.execute(''' SELECT 
+                           pb_pastes.id as paste_id,
+                           pb_pastes.parent_id as parent_id,
+                           pb_pastes.category_id as category_id,
+                           pb_categorys.name as category_name,
+                           pb_pastes.user_id as paste_user_id,
+                           pb_pastescontent.content as paste_content,
+                           pb_pastescontent.datum as datum,
+                           pb_pastescontent.title as title
+                       FROM pb_pastes JOIN pb_pastescontent ON pb_pastes.id = pb_pastescontent.paste_id JOIN pb_categorys ON pb_pastes.category_id = pb_categorys.id
+                       WHERE pb_pastes.id = %s''',(paste_id))
         paste = cursor.fetchone()
-        
+        cursor.close()       
         if not paste:
             raise DbPasteError("No paste found for this ID")
-        
-        self.getConnection().commit()
-        self.disconnect()
 
         return paste
       

@@ -1,6 +1,5 @@
 from application.db.Paste import Paste as dbPaste
 
-
 class Paste:
     """
         Paste: 
@@ -78,9 +77,7 @@ class Paste:
             @author Christian Wenzlick <christian.wenzlick@siemens.com> 
             @access public
         """
-        
-        paste = self.dbPaste.GetPasteByID(paste_id)
-        
+        paste = self.dbPaste.getPasteByID(paste_id)
         return paste
         
     def editPaste(self, paste_id, parent_id, category_id, user_id, paste_content, title):

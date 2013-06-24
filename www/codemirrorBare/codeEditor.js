@@ -20,9 +20,9 @@
 	*	@author cwe
 	*/
 	function initialiseCodeEditor()
-	{
+	{ 
 		// sets the path were language modes can be found - %N represents a mode like 'php'
-		CodeMirror.modeURL = "../mode/%N/%N.js";
+		CodeMirror.modeURL = "../mode/%N/%N.js"; 
 		modes = CodeMirror.modeInfo;
 		
 		// get the codeeditor div and create all visual elements
@@ -30,23 +30,23 @@
 		detectionLabel = document.createElement("label");
 		select = document.createElement("select");
 		button = document.createElement("button");
-		texteditor = document.createElement("textarea");
-		texteditor.id = "codeMirrorEditor";
+		//texteditor = document.createElement("textarea");
+		//texteditor.id = "codeMirrorEditor";
 		
-		// fill the select box with all available modes
+                // fill the select box with all available modes
 		fillLanguageSelect();
 		
-		// insert all visual elements into the dom tree
-		document.body.insertBefore(button, rootElement);
-		document.body.insertBefore(select, button);
-		document.body.insertBefore(detectionLabel, select);
-		document.body.insertBefore(texteditor, detectionLabel);
+                // insert all visual elements into the dom tree
+		rootElement.parentNode.insertBefore(button, rootElement);
+		rootElement.parentNode.insertBefore(select, button);
+		rootElement.parentNode.insertBefore(detectionLabel, select);
+		//rootElement.parentNode.insertBefore(texteditor, detectionLabel);
 
 		detectionLabel.innerHTML = "Detecting: ";
 		
 		button.innerHTML = 'Ausw&auml;hlen';
 		button.onclick = function(){
-			endDetection();
+			endDetection(); return false;
 		};
 		
 		/*
@@ -72,13 +72,12 @@
 	*	@author cwe
 	*/
 	function loadExternalScripts()
-	{
-		loadExternalCSS("./lib/codemirror.css");
-		loadExternalCSS("./doc/docs.css");
-		loadExternalJavaScript("./lib/codemirror.js");
-		loadExternalJavaScript("./mode/meta.js");
-		loadExternalJavaScript("./addon/mode/loadmode.js");
-		loadExternalJavaScript("./addon/runmode/runmode.js", true);
+	{ 
+		loadExternalCSS("./codemirrorBare/lib/codemirror.css");
+		loadExternalJavaScript("./codemirrorBare/lib/codemirror.js");
+		loadExternalJavaScript("./codemirrorBare/mode/meta.js");
+		loadExternalJavaScript("./codemirrorBare/addon/mode/loadmode.js");
+		loadExternalJavaScript("./codemirrorBare/addon/runmode/runmode.js", true);
 	}
 	
 	/*
@@ -110,7 +109,7 @@
 		script.type = "text/javascript";
 		// if this is the last file then add the initialise function to the onload event
 		if(last == true)
-		{
+		{ 
 			script.onload = initialiseCodeEditor;
 		}
 		// add the script tag to the head if available or the body

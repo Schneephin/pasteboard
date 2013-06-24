@@ -110,7 +110,30 @@ class Pasteboard:
             self.return_response(result)
         else:
             self.print_headers({"Status": "403 Forbidden"})
-   
+    
+    def getPasteById(self):
+        """
+           getPasteById
+           get a paste with a given id
+           @author Christian Wenzlick <christian.wenzlick@siemens.com>
+           @access public
+        """   
+        paste_id = cgi.escape(json.loads(self.data)['paste_id'])   
+        if not paste_id:
+            result = {'state': 'error'} 
+            result['msg'] = 'no paste id'       
+        else:
+            try:
+                paste = self.pb.getPasteById(paste_id)
+                sys.stderr.write(paste.__str__())
+                result = {'state': 'ok'}
+                result['data'] = {'paste': paste }
+            except Exception as e:
+                result = {'state': 'error'}
+                result['msg'] = e.__str__()
+           
+        self.return_response(result)           
+
     def createPaste(self):
         """
             createPaste 
@@ -121,7 +144,7 @@ class Pasteboard:
         parent_id = cgi.escape(json.loads(self.data)['parent'])   
         category_id = self.pb.saveCategorys(cgi.escape(json.loads(self.data)['category'])) 
         user_id = cgi.escape(json.loads(self.data)['userid']) 
-        paste_content = cgi.escape(json.loads(self.data)['content'])
+        paste_content = cgi.escape(json.loads(self.data)['codeMirrorEditor'])
         title = cgi.escape(json.loads(self.data)['title'])		
  
         if not parent_id:
@@ -290,6 +313,8 @@ def main():
             pasteboard.getUser()
         elif function == 'getPastesList':
             pasteboard.getPastesList()
+        elif function == 'getPasteById':
+            pasteboard.getPasteById()
         elif function == 'getInviteKey':
             pasteboard.getInviteKey()
         elif function == 'createPaste':

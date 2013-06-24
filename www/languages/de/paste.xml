@@ -6,4 +6,5 @@
     <pasteContent>Inhalt</pasteContent>
     <pasteSubmit>Anlegen</pasteSubmit>
     <pasteCategory>Kategorie</pasteCategory>
+    <pasteParent>Parent</pasteParent>
 </trans>
