@@ -22,7 +22,7 @@
 	function initialiseCodeEditor()
 	{ 
 		// sets the path were language modes can be found - %N represents a mode like 'php'
-		CodeMirror.modeURL = "../mode/%N/%N.js"; 
+		CodeMirror.modeURL = "../codemirrorBare/mode/%N/%N.js"; 
 		modes = CodeMirror.modeInfo;
 		
 		// get the codeeditor div and create all visual elements

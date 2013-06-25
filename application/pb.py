@@ -186,7 +186,8 @@ class Pb:
         """
         try:
             paste = Paste.Paste()
-            return paste.createNewPaste(parent_id, category_id, user_id, paste_content, title)
+            categoryId = self.saveCategorys(category_id)
+            return paste.createNewPaste(parent_id, categoryId, user_id, paste_content, title)
         except DbPasteError as e:
             raise PasteboardError(e.__str__()) 
 

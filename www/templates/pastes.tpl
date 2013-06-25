@@ -15,7 +15,7 @@
     </thead>
     <tbody>
         <% for ( var i in pastes ) { %>
-            <tr onclick='document.location ="/paste.py?id=<%=pastes[i].id%>"'>
+            <tr onclick='document.location ="/paste.py?id=<%=pastes[i].paste_id%>"'>
                 <td><%=pastes[i].paste_id%></td>
                 <td><%=pastes[i].title%></td>
                 <td><%=pastes[i].datum%></td>

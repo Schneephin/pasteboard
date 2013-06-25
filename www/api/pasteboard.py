@@ -142,7 +142,7 @@ class Pasteboard:
             @access public
         """
         parent_id = cgi.escape(json.loads(self.data)['parent'])   
-        category_id = self.pb.saveCategorys(cgi.escape(json.loads(self.data)['category'])) 
+        category_id = cgi.escape(json.loads(self.data)['category'])
         user_id = cgi.escape(json.loads(self.data)['userid']) 
         paste_content = cgi.escape(json.loads(self.data)['codeMirrorEditor'])
         title = cgi.escape(json.loads(self.data)['title'])		
