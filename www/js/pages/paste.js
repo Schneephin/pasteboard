@@ -32,9 +32,9 @@ if (typeof token != "undefined") {
     }
   
     //add sidebar
-    var content = document.getElementById("contentouter");
-    content.classList.add("side");
-    content.classList.remove("noside");
+   // var content = document.getElementById("contentouter");
+   // content.classList.add("side");
+   // content.classList.remove("noside");
     
 
     //add the codeEditor only after all the elements finished loading, else it will break

@@ -28,7 +28,7 @@ else:
     tpl = "".join(open(template,'r').readlines())
     
     #define templates to load
-    pages = {'header': 'headerloggedin','footer':'footer','content':'paste','sidebar':'sidenav'}
+    pages = {'header': 'headerloggedin','footer':'footer','content':'paste'}
 
     # print header
     basics.print_headers({'Content-type':'text/html'})
