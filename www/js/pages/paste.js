@@ -21,7 +21,7 @@ if (typeof token != "undefined") {
     deleteCookie('pasteid');
 
      //if a paste_id is defined load the paste and display it else add blank values
-    if(typeof paste_id != "undefined")
+    if(typeof paste_id != "undefined"  && paste_id > 0)
     {
         var data = new Object();
         data['paste_id'] = paste_id; 
