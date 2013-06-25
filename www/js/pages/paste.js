@@ -20,7 +20,7 @@ if (typeof token != "undefined") {
     var paste_id = readCookie('pasteid');
     deleteCookie('pasteid');
 
-    //if a paste_id is defined load the paste and display it
+     //if a paste_id is defined load the paste and display it else add blank values
     if(typeof paste_id != "undefined")
     {
         var data = new Object();
@@ -30,7 +30,18 @@ if (typeof token != "undefined") {
         var result = rest.handleRequset();
         addToTemplate(result);
     }
-  
+    else
+    {
+	var pastes = new Object();
+	var paste = new Object();
+	paste['title'] = ""; paste['paste_content'] = ""; paste['category_name'] = ""; 
+	pastes['paste'] = paste;
+	var result = new Object();
+	result['state'] = "ok";
+	result['data'] = pastes;
+	addToTemplate(result);
+    }
+	
     //add sidebar
    // var content = document.getElementById("contentouter");
    // content.classList.add("side");
