@@ -272,7 +272,17 @@ class Pasteboard:
         """
         # return access-Token
         self.print_headers({"Content-Type": "text/html"})
-        sys.stdout.write(json.dumps(result, default=str))
+        sys.stdout.write(json.dumps(self.convert_values_to_string(result),  default=str))
+
+    def convert_values_to_string(self,dictionary):
+        """Recursively converts dictionary keys to strings."""
+        if isinstance(dictionary, bytes):
+            return str(dictionary,"utf8")
+        elif isinstance(dictionary, dict):
+            return dict((str(k), self.convert_values_to_string(v)) 
+                for k, v in dictionary.items())
+        else:
+            return dictionary
 
     def print_headers(self,headers):
         """
@@ -306,27 +316,27 @@ def main():
 
     # check if called api-function exists if yes call it
     # if not return with 404 not found
-    try:
-        if function == 'login':
-            pasteboard.login()
-        elif function == 'getUser':
-            pasteboard.getUser()
-        elif function == 'getPastesList':
-            pasteboard.getPastesList()
-        elif function == 'getPasteById':
-            pasteboard.getPasteById()
-        elif function == 'getInviteKey':
-            pasteboard.getInviteKey()
-        elif function == 'createPaste':
-            pasteboard.createPaste()
-        elif function == 'register':
-            pasteboard.register()
-        elif function == 'getAllCategorys':
-            pasteboard.allCategorys()
-        else:
-            pasteboard.print_headers({"Status": "404 Not found"})
-    except:
+   # try:
+    if function == 'login':
+        pasteboard.login()
+    elif function == 'getUser':
+        pasteboard.getUser()
+    elif function == 'getPastesList':
+        pasteboard.getPastesList()
+    elif function == 'getPasteById':
+        pasteboard.getPasteById()
+    elif function == 'getInviteKey':
+        pasteboard.getInviteKey()
+    elif function == 'createPaste':
+        pasteboard.createPaste()
+    elif function == 'register':
+        pasteboard.register()
+    elif function == 'getAllCategorys':
+        pasteboard.allCategorys()
+    else:
         pasteboard.print_headers({"Status": "404 Not found"})
+   # except:
+    #    pasteboard.print_headers({"Status": "404 Not found"})
 
 if __name__ == '__main__':
     main()
