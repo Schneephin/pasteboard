@@ -160,7 +160,10 @@ class Pb:
         """
         try:
             paste = Paste.Paste()
-            return paste.getPasteByID(paste_id)
+            cat = Categorys.Category()
+            pa = paste.getPasteByID(paste_id)
+            pa['category_name'] = cat.getCategoryString(pa['category_id'])
+            return pa
         except DbPasteError as e:
             raise PasteboardError(e.__str__()) 
     

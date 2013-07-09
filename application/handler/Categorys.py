@@ -100,3 +100,13 @@ class Category:
                 self.findAllCategorys(category['id'])
 
         return self.categorys
+
+    def getCategoryString(self,categoryid):
+        cat = self.dbCategory.findCategoryById(categoryid)
+        catstring = cat['name']
+
+        if cat['parent_id'] == 0:
+            return catstring
+        return self.getCategoryString(cat['parent_id'])+"/"+catstring
+
+

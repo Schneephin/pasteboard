@@ -54,7 +54,7 @@ class Paste(DB):
         # the id is auto-incremented, so we need to get the actual value here
         paste_id = self.connection.insert_id()
         self.getConnection().commit()
-        cursor.execute('INSERT INTO pb_pastescontent (paste_id, content, title)  VALUES (%s, %s, %s)',(paste_id, paste_content, title))
+        cursor.execute('INSERT INTO pb_pastescontent (paste_id, content, title, datum)  VALUES (%s, %s, %s, NOW())',(paste_id, paste_content, title))
         self.getConnection().commit()
         self.disconnect()
         
